@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FaceRecognitionDotNet.Server</name>
+    </assembly>
+    <members>
+        <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController">
+            <summary>
+            Get rectangles of face area from specified image
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController.Locations(FaceRecognitionDotNet.Server.Models.Image)">
+            <summary>
+            Returns an enumerable collection of face location correspond to all faces in specified image.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance has been disposed.
+            </summary>
+            <returns>true if this instance has been disposed; otherwise, false.</returns>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.Dispose">
+            <summary>
+            Releases all resources used by this <see cref="T:FaceRecognitionDotNet.DisposableObject"/>.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by this <see cref="T:FaceRecognitionDotNet.DisposableObject"/>.
+            </summary>
+            <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.FaceArea">
+            <summary>
+            Describes the left, top, right and bottom location of a face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Bottom">
+            <summary>
+            The y-axis value of the bottom of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Left">
+            <summary>
+            The x-axis value of the left side of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Right">
+            <summary>
+            The x-axis value of the right side of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Top">
+            <summary>
+            The y-axis value of the top of the rectangle of face.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Image">
+            <summary>
+            Represents a image data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Image.Data">
+            <summary>
+            The image data.
+            </summary>
+        </member>
+    </members>
+</doc>
