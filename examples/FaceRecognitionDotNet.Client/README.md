@@ -101,11 +101,13 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *FaceDetectionApi* | [**FaceDetectionLocationsPost**](docs/FaceDetectionApi.md#facedetectionlocationspost) | **POST** /FaceDetection/Locations | Returns an enumerable collection of face location correspond to all faces in specified image.
+*FaceEncodingApi* | [**FaceEncodingEncodingPost**](docs/FaceEncodingApi.md#faceencodingencodingpost) | **POST** /FaceEncoding/Encoding | Returns an face feature data from image contains a human face.
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [Model.Encdoing](docs/Encdoing.md)
  - [Model.FaceArea](docs/FaceArea.md)
  - [Model.Image](docs/Image.md)
  - [Model.ProblemDetails](docs/ProblemDetails.md)

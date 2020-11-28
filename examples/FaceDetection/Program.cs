@@ -34,7 +34,7 @@ namespace FaceDetection
                 var result = api.FaceDetectionLocationsPostWithHttpInfo(image);
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    Console.WriteLine($"[Error] API returns {result.StatusCode}");
+                    Console.WriteLine($"[Error] {nameof(FaceDetectionApi)} returns {result.StatusCode}");
                     return;
                 }
 
