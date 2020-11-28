@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,32 +11,32 @@ namespace FaceRecognitionDotNet.Server.Controllers
 {
 
     /// <summary>
-    /// Get rectangles of face area from specified image.
+    /// Get feature data of face.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class FaceDetectionController : ControllerBase
+    public class FaceEncodingController : ControllerBase
     {
 
         #region Fields
 
-        private readonly IFaceDetectionService _FaceDetectionService;
+        private readonly IFaceEncodingService _FaceEncodingService;
 
-        private readonly ILogger<FaceDetectionController> _Logger;
+        private readonly ILogger<FaceEncodingController> _Logger;
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceDetectionController"/> class with <see cref="IFaceDetectionService"/> and logger.
+        /// Initializes a new instance of the <see cref="FaceEncodingController"/> class with <see cref="IFaceEncodingService"/> and logger.
         /// </summary>
-        /// <param name="faceDetectionService">The service provide face detect functions.</param>
+        /// <param name="faceEncodingService">The service provide face detect functions.</param>
         /// <param name="logger">The logger.</param>
-        public FaceDetectionController(IFaceDetectionService faceDetectionService,
-                                       ILogger<FaceDetectionController> logger)
+        public FaceEncodingController(IFaceEncodingService faceEncodingService,
+                                      ILogger<FaceEncodingController> logger)
         {
-            this._FaceDetectionService = faceDetectionService;
+            this._FaceEncodingService = faceEncodingService;
             this._Logger = logger;
         }
 
@@ -46,15 +45,15 @@ namespace FaceRecognitionDotNet.Server.Controllers
         #region Methods
 
         /// <summary>
-        /// Returns an enumerable collection of face location correspond to all faces in specified image.
+        /// Returns an face feature data from image contains a human face.
         /// </summary>
-        [Route("Locations")]
+        [Route("Encoding")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<FaceArea>> Locations([FromBody] Models.Image image)
+        public ActionResult<Encdoing> Encoding([FromBody] Models.Image image)
         {
             IResource<FaceRecognition> resource = null;
 
@@ -63,11 +62,11 @@ namespace FaceRecognitionDotNet.Server.Controllers
                 if (!Cache.TryGetResource(out resource))
                     return new StatusCodeResult(StatusCodes.Status429TooManyRequests);
 
-                return Ok(this._FaceDetectionService.Locations(resource, image.Data));
+                return Ok(this._FaceEncodingService.Encoding(resource, image.Data));
             }
             catch (Exception e)
             {
-                this._Logger.LogError($"[{nameof(this.Locations)}] {e.Message}");
+                this._Logger.LogError($"[{nameof(this.Encoding)}] {e.Message}");
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
             finally

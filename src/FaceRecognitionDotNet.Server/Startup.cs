@@ -78,6 +78,7 @@ namespace FaceRecognitionDotNet.Server
         private void ConfigureApplicationServices(IServiceCollection services)
         {
             services.AddTransient<IFaceDetectionService, FaceDetectionService>();
+            services.AddTransient<IFaceEncodingService, FaceEncodingService>();
         }
 
 
