@@ -6,12 +6,36 @@
     <members>
         <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController">
             <summary>
-            Get rectangles of face area from specified image
+            Get rectangles of face area from specified image.
             </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController.#ctor(FaceRecognitionDotNet.Server.Services.Interfaces.IFaceDetectionService,Microsoft.Extensions.Logging.ILogger{FaceRecognitionDotNet.Server.Controllers.FaceDetectionController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController"/> class with <see cref="T:FaceRecognitionDotNet.Server.Services.Interfaces.IFaceDetectionService"/> and logger.
+            </summary>
+            <param name="faceDetectionService">The service provide face detect functions.</param>
+            <param name="logger">The logger.</param>
         </member>
         <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController.Locations(FaceRecognitionDotNet.Server.Models.Image)">
             <summary>
             Returns an enumerable collection of face location correspond to all faces in specified image.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController">
+            <summary>
+            Get feature data of face.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController.#ctor(FaceRecognitionDotNet.Server.Services.Interfaces.IFaceEncodingService,Microsoft.Extensions.Logging.ILogger{FaceRecognitionDotNet.Server.Controllers.FaceEncodingController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController"/> class with <see cref="T:FaceRecognitionDotNet.Server.Services.Interfaces.IFaceEncodingService"/> and logger.
+            </summary>
+            <param name="faceEncodingService">The service provide face detect functions.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController.Encoding(FaceRecognitionDotNet.Server.Models.Image)">
+            <summary>
+            Returns an face feature data from image contains a human face.
             </summary>
         </member>
         <member name="P:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.IsDisposed">
@@ -30,6 +54,16 @@
             Releases all resources used by this <see cref="T:FaceRecognitionDotNet.DisposableObject"/>.
             </summary>
             <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Encdoing">
+            <summary>
+            Represents a feature data of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Encdoing.Data">
+            <summary>
+            A feature data of face as raw format.
+            </summary>
         </member>
         <member name="T:FaceRecognitionDotNet.Server.Models.FaceArea">
             <summary>
