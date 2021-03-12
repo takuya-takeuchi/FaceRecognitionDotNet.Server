@@ -2,8 +2,10 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using FaceRecognitionDotNet.Server.Data;
 using FaceRecognitionDotNet.Server.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 
@@ -54,7 +56,24 @@ namespace FaceRecognitionDotNet.Server
                 return;
             }
 
-            CreateHostBuilder(args.Skip(2).ToArray()).Build().Run();
+            var host = CreateHostBuilder(args.Skip(2).ToArray()).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                try
+                {
+                    var context = services.GetRequiredService<LocalDbContext>();
+                    DatabaseInitializer<LocalDbContext>.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "An error occurred while seeding the database");
+                }
+            }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args)

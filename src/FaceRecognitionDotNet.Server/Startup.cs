@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
-using FaceRecognitionDotNet.Server.Models.Databases;
+using FaceRecognitionDotNet.Server.Data;
 using FaceRecognitionDotNet.Server.Services;
 using FaceRecognitionDotNet.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
