@@ -22,7 +22,7 @@ Create server connection.
 Enter the following text
 
 * Host
-  * localhost
+  * database
 * Port
   * 5432
 * Username
