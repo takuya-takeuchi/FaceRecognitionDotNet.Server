@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FaceRecognitionDotNet.Client\src\FaceRecognitionDotNet.Client\FaceRecognitionDotNet.Client.csproj" />
+    <ProjectReference Include="..\..\src\FaceRecognitionDotNet.Client\src\FaceRecognitionDotNet.Client\FaceRecognitionDotNet.Client.csproj" />
   </ItemGroup>
 
 </Project>
