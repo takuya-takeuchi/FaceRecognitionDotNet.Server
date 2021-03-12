@@ -1,11 +1,12 @@
 using System;
 using System.IO;
 using System.Reflection;
-using FaceRecognitionDotNet.Server.Helpers;
+using FaceRecognitionDotNet.Server.Data;
 using FaceRecognitionDotNet.Server.Services;
 using FaceRecognitionDotNet.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,7 +48,10 @@ namespace FaceRecognitionDotNet.Server
                 c.IncludeXmlComments(filePath);
             });
 
-            this.ConfigureApplicationServices(services);
+            ConfigureApplicationServices(services);
+
+            services.AddDbContext<LocalDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,12 +79,11 @@ namespace FaceRecognitionDotNet.Server
 
         #region Helpers
 
-        private void ConfigureApplicationServices(IServiceCollection services)
+        private static void ConfigureApplicationServices(IServiceCollection services)
         {
             services.AddTransient<IFaceDetectionService, FaceDetectionService>();
             services.AddTransient<IFaceEncodingService, FaceEncodingService>();
         }
-
 
         #endregion
 
