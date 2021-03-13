@@ -31,7 +31,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>List&lt;Registration&gt;</returns>
-        List<Registration> FaceRegistrationGetAllPost();
+        List<Registration> FaceRegistrationGetAllGet();
 
         /// <summary>
         /// Get all registered person data.
@@ -41,7 +41,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// </remarks>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List&lt;Registration&gt;</returns>
-        ApiResponse<List<Registration>> FaceRegistrationGetAllPostWithHttpInfo();
+        ApiResponse<List<Registration>> FaceRegistrationGetAllGetWithHttpInfo();
         /// <summary>
         /// Register person data.
         /// </summary>
@@ -78,7 +78,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Registration&gt;</returns>
-        System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all registered person data.
@@ -89,7 +89,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Registration&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Registration>>> FaceRegistrationGetAllPostWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<Registration>>> FaceRegistrationGetAllGetWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register person data.
         /// </summary>
@@ -238,9 +238,9 @@ namespace FaceRecognitionDotNet.Client.Api
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>List&lt;Registration&gt;</returns>
-        public List<Registration> FaceRegistrationGetAllPost()
+        public List<Registration> FaceRegistrationGetAllGet()
         {
-            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = FaceRegistrationGetAllPostWithHttpInfo();
+            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = FaceRegistrationGetAllGetWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -249,7 +249,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List&lt;Registration&gt;</returns>
-        public FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> FaceRegistrationGetAllPostWithHttpInfo()
+        public FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> FaceRegistrationGetAllGetWithHttpInfo()
         {
             FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
 
@@ -272,11 +272,11 @@ namespace FaceRecognitionDotNet.Client.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllGet", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -289,9 +289,9 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Registration&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllGetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = await FaceRegistrationGetAllPostWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = await FaceRegistrationGetAllGetWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -301,7 +301,7 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Registration&gt;)</returns>
-        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>>> FaceRegistrationGetAllPostWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>>> FaceRegistrationGetAllGetWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
@@ -327,11 +327,11 @@ namespace FaceRecognitionDotNet.Client.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllGet", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

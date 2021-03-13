@@ -11,6 +11,7 @@ using FaceRecognitionDotNet.Client.Api;
 using FaceRecognitionDotNet.Client.Model;
 using FaceRecognitionDotNet.Front.Models;
 using FaceRecognitionDotNet.Front.Services.Interfaces;
+
 using Image = System.Drawing.Image;
 
 namespace FaceRecognitionDotNet.Front.Services
@@ -35,6 +36,18 @@ namespace FaceRecognitionDotNet.Front.Services
         #endregion
 
         #region IFaceDetectionService Members
+
+        public async Task<IEnumerable<Registration>> GetAll()
+        {
+            var faceRegistrationApi = new FaceRegistrationApi(this._EndPointUrl);
+            var registrationResult = await faceRegistrationApi.FaceRegistrationGetAllGetWithHttpInfoAsync();
+            if (registrationResult.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return null;
+            }
+
+            return registrationResult.Data;
+        }
 
         public async Task<string> Register(RegistrationViewModel registrationViewModel, byte[] image)
         {

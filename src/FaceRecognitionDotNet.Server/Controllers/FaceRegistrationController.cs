@@ -48,14 +48,15 @@ namespace FaceRecognitionDotNet.Server.Controllers
         /// Get all registered person data.
         /// </summary>
         [Route("GetAll")]
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<Registration>> GetAll()
+        public ActionResult<List<Registration>> GetAll()
         {
             try
             {
-                return Ok(this._FaceRegistrationService.GetAll());
+                var results = this._FaceRegistrationService.GetAll().Result;
+                return Ok(new List<Registration>(results));
             }
             catch (Exception e)
             {

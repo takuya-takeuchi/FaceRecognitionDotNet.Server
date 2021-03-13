@@ -35,7 +35,7 @@ namespace FaceRecognitionDotNet.Server.Services
 
         public Task<IEnumerable<Registration>> GetAll()
         {
-            var resuls = new List<Registration>();
+            var results = new List<Registration>();
 
             try
             {
@@ -69,6 +69,8 @@ namespace FaceRecognitionDotNet.Server.Services
                     {
                         Data = encoding
                     };
+
+                    results.Add(person);
                 }
             }
             catch (Exception ex)
@@ -76,7 +78,7 @@ namespace FaceRecognitionDotNet.Server.Services
                 // TODO: Handle failure
             }
 
-            return Task.FromResult((IEnumerable<Registration>)resuls);
+            return Task.FromResult((IEnumerable<Registration>)results);
         }
 
         public Task Register(Registration registration)

@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FaceRegistrationGetAllPost**](FaceRegistrationApi.md#faceregistrationgetallpost) | **POST** /FaceRegistration/GetAll | Get all registered person data.
+[**FaceRegistrationGetAllGet**](FaceRegistrationApi.md#faceregistrationgetallget) | **GET** /FaceRegistration/GetAll | Get all registered person data.
 [**FaceRegistrationRegisterPost**](FaceRegistrationApi.md#faceregistrationregisterpost) | **POST** /FaceRegistration/Register | Register person data.
 
 
-<a name="faceregistrationgetallpost"></a>
-# **FaceRegistrationGetAllPost**
-> List&lt;Registration&gt; FaceRegistrationGetAllPost ()
+<a name="faceregistrationgetallget"></a>
+# **FaceRegistrationGetAllGet**
+> List&lt;Registration&gt; FaceRegistrationGetAllGet ()
 
 Get all registered person data.
 
@@ -24,7 +24,7 @@ using FaceRecognitionDotNet.Client.Model;
 
 namespace Example
 {
-    public class FaceRegistrationGetAllPostExample
+    public class FaceRegistrationGetAllGetExample
     {
         public static void Main()
         {
@@ -35,12 +35,12 @@ namespace Example
             try
             {
                 // Get all registered person data.
-                List<Registration> result = apiInstance.FaceRegistrationGetAllPost();
+                List<Registration> result = apiInstance.FaceRegistrationGetAllGet();
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling FaceRegistrationApi.FaceRegistrationGetAllPost: " + e.Message );
+                Debug.Print("Exception when calling FaceRegistrationApi.FaceRegistrationGetAllGet: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
