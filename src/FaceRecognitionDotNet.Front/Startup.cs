@@ -1,29 +1,40 @@
+using FaceRecognitionDotNet.Front.Services;
+using FaceRecognitionDotNet.Front.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FaceRecognitionDotNet.Front
 {
-    public class Startup
+
+    public sealed class Startup
     {
+
+        #region Constructors
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
+        #endregion
+
+        #region Properties
+
         public IConfiguration Configuration { get; }
+
+        #endregion
+
+        #region Methods
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            ConfigureApplicationServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +50,7 @@ namespace FaceRecognitionDotNet.Front
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -53,5 +65,18 @@ namespace FaceRecognitionDotNet.Front
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        #region Helpers
+
+        private static void ConfigureApplicationServices(IServiceCollection services)
+        {
+            services.AddTransient<IFaceDetectionService, FaceDetectionService>();
+        }
+
+        #endregion
+
+        #endregion
+
     }
+
 }

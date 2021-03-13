@@ -6,13 +6,13 @@ namespace FaceRecognitionDotNet.Front.Models
     public sealed class DetectionViewModel
     {
 
-        public ImageViewModel[] Images
+        public ImageViewModel Image
         {
             get;
             set;
         }
 
-        public IEnumerable<DetectAreaModel>[] DetectAreas
+        public DetectAreaModel[] DetectAreas
         {
             get;
             set;

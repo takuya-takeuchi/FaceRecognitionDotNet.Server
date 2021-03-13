@@ -15,14 +15,14 @@ using Microsoft.OpenApi.Models;
 namespace FaceRecognitionDotNet.Server
 {
 
-    public class Startup
+    public sealed class Startup
     {
 
         #region Constructors
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         #endregion
@@ -51,7 +51,7 @@ namespace FaceRecognitionDotNet.Server
             ConfigureApplicationServices(services);
 
             services.AddDbContext<LocalDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+                options.UseNpgsql(this.Configuration.GetConnectionString("PostgreSQLConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
