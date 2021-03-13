@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FaceRecognitionDotNet.Front.Models
 {
 
@@ -5,6 +7,12 @@ namespace FaceRecognitionDotNet.Front.Models
     {
 
         public ImageViewModel[] Images
+        {
+            get;
+            set;
+        }
+
+        public IEnumerable<DetectAreaModel>[] DetectAreas
         {
             get;
             set;

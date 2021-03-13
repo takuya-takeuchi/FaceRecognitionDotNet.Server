@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using FaceRecognitionDotNet.Client;
 using FaceRecognitionDotNet.Client.Api;
 using FaceRecognitionDotNet.Front.Models;
 
@@ -32,22 +31,29 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
             var validFiles = files.Where(formFile => formFile != null && formFile.Length > 0).ToArray();
 
-            var list = new List<ImageViewModel>(validFiles.Length);
-            this.ViewBag.Images = list;
+            var images = new List<ImageViewModel>(validFiles.Length);
+            var detectAreas = new List<IEnumerable<DetectAreaModel>>(validFiles.Length);
+            this.ViewBag.Images = detectAreas;
 
             foreach (var formFile in validFiles)
             {
                 await using var ms = new MemoryStream();
                 await formFile.OpenReadStream().CopyToAsync(ms);
 
-                using var bitmap = Bitmap.FromStream(ms);
+                using var bitmap = Image.FromStream(ms);
                 var data = ViewImage(ms.ToArray());
                 var width = bitmap.Width;
                 var height = bitmap.Height;
-                list.Add(new ImageViewModel(formFile.FileName, data, width, height));
+
+                images.Add(new ImageViewModel(formFile.FileName, data, width, height));
+
+                var areas = new List<DetectAreaModel>();
+                areas.Add(new DetectAreaModel(100, 100, 200, 200, 0.8f));
+                detectAreas.Add(areas);
             }
-            
-            model.Images = list.ToArray();
+
+            model.Images = images.ToArray();
+            model.DetectAreas = detectAreas.ToArray();
 
             return this.View(nameof(this.Index), model);
         }

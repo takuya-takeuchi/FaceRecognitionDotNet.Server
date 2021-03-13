@@ -30,20 +30,26 @@
 <table>
     @if (@Model?.Images != null)
     {
-        foreach (var @image in @Model.Images)
+        for (var index = 0; index < @Model.Images.Length; index++)
         {
+            var image = @Model.Images[index];
+            var detectAreas = @Model.DetectAreas[index];
+
             if (!string.IsNullOrEmpty(@image.Data))
             {
+                var areas = @Html.Raw(Json.Serialize(detectAreas));
+
                 <tr>
                     <td>@image.Name (@image.Width x @image.Height)</td>
                 </tr>
                 <tr>
                     <td>
                         <canvas id="SrcCanvas"
-                                style="height:100%;width:100%;"></canvas>
+                                style="height: 100%; width: 100%;">
+                        </canvas>
 
                         <script type="text/javascript">
-                            canvas_init('@Html.Raw(@image.Data)');
+                            draw_detect_result('@Html.Raw(@image.Data)', @areas);
                         </script>
                     </td>
                 </tr>
