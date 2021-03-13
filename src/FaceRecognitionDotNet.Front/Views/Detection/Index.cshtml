@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Face Detection";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Upload image file to detect face</p>
+
+@*<form method="post" enctype="multipart/form-data" asp-controller="Detection" asp-action="FileUpload">
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="file" name="files" multiple />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>*@
+
+
+@*<style type="text/css">
+        canvas {
+            border: solid 3px #000;
+        }
+    </style>
+
+    <canvas id="SrcCanvas"
+            style="height:90%;width:100%;"></canvas>
+
+    <script src="~/js/canvas.js"></script>
+    <script type="text/javascript">
+        canvas_init("/img/work.img");
+    </script>*@
+
+<form method="post" enctype="multipart/form-data" asp-controller="Detection" asp-action="FileUpload">
+    <div class="form-group">
+        <div class="col-md-4">
+            <input type="file" name="files" multiple />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+</form>
+
+<table>
+    @*<tr>
+        <td>File Name:</td>
+        <td>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            <br />
+        </td>
+    </tr>*@
+    <tr>
+        <td></td>
+        <td>
+            <br />
+        </td>
+    </tr>
+    <tr>
+        @if (@ViewBag.Images != null)
+        {
+            foreach (var @image in @ViewBag.Images)
+            {
+                if (!string.IsNullOrEmpty(@image))
+                {
+                    <td>Uploaded Image:</td>
+                    <td>
+                        <img src="@image" width="250px" height="200px" alt="Alternate Text"/>
+                    </td>
+                }
+            }
+        }
+    </tr>
+</table>
