@@ -83,6 +83,7 @@ namespace FaceRecognitionDotNet.Server
         {
             services.AddTransient<IFaceDetectionService, FaceDetectionService>();
             services.AddTransient<IFaceEncodingService, FaceEncodingService>();
+            services.AddTransient<IFaceRegistrationService, FaceRegistrationService>();
         }
 
         #endregion

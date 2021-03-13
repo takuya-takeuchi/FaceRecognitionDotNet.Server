@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceRecognitionDotNet.Client", "src\FaceRecognitionDotNet.Client\FaceRecognitionDotNet.Client.csproj", "{A8D2925C-B84E-407C-867E-FBBB269918EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceRecognitionDotNet.Client", "src\FaceRecognitionDotNet.Client\FaceRecognitionDotNet.Client.csproj", "{F4CB3032-60E1-4784-A873-E962DE9A5067}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceRecognitionDotNet.Client.Test", "src\FaceRecognitionDotNet.Client.Test\FaceRecognitionDotNet.Client.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8D2925C-B84E-407C-867E-FBBB269918EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8D2925C-B84E-407C-867E-FBBB269918EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8D2925C-B84E-407C-867E-FBBB269918EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8D2925C-B84E-407C-867E-FBBB269918EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CB3032-60E1-4784-A873-E962DE9A5067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CB3032-60E1-4784-A873-E962DE9A5067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CB3032-60E1-4784-A873-E962DE9A5067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CB3032-60E1-4784-A873-E962DE9A5067}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

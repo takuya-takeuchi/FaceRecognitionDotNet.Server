@@ -102,15 +102,18 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *FaceDetectionApi* | [**FaceDetectionLocationsPost**](docs/FaceDetectionApi.md#facedetectionlocationspost) | **POST** /FaceDetection/Locations | Returns an enumerable collection of face location correspond to all faces in specified image.
 *FaceEncodingApi* | [**FaceEncodingEncodingPost**](docs/FaceEncodingApi.md#faceencodingencodingpost) | **POST** /FaceEncoding/Encoding | Returns an face feature data from image contains a human face.
+*FaceRegistrationApi* | [**FaceRegistrationRegisterPost**](docs/FaceRegistrationApi.md#faceregistrationregisterpost) | **POST** /FaceRegistration/Register | Register person data.
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
- - [Model.Encdoing](docs/Encdoing.md)
+ - [Model.Demographics](docs/Demographics.md)
+ - [Model.Encoding](docs/Encoding.md)
  - [Model.FaceArea](docs/FaceArea.md)
  - [Model.Image](docs/Image.md)
  - [Model.ProblemDetails](docs/ProblemDetails.md)
+ - [Model.Registration](docs/Registration.md)
 
 
 <a name="documentation-for-authorization"></a>

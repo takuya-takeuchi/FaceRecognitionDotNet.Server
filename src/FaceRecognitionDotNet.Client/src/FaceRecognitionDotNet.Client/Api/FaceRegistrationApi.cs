@@ -23,66 +23,66 @@ namespace FaceRecognitionDotNet.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFaceEncodingApiSync : IApiAccessor
+    public interface IFaceRegistrationApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
-        /// Returns an face feature data from image contains a human face.
+        /// Register person data.
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
-        /// <returns>Encoding</returns>
-        Encoding FaceEncodingEncodingPost(Image image = default(Image));
+        /// <param name="registration"> (optional)</param>
+        /// <returns></returns>
+        void FaceRegistrationRegisterPost(Registration registration = default(Registration));
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face.
+        /// Register person data.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
-        /// <returns>ApiResponse of Encoding</returns>
-        ApiResponse<Encoding> FaceEncodingEncodingPostWithHttpInfo(Image image = default(Image));
+        /// <param name="registration"> (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> FaceRegistrationRegisterPostWithHttpInfo(Registration registration = default(Registration));
         #endregion Synchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFaceEncodingApiAsync : IApiAccessor
+    public interface IFaceRegistrationApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Returns an face feature data from image contains a human face.
+        /// Register person data.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
+        /// <param name="registration"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Encoding</returns>
-        System.Threading.Tasks.Task<Encoding> FaceEncodingEncodingPostAsync(Image image = default(Image), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task FaceRegistrationRegisterPostAsync(Registration registration = default(Registration), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face.
+        /// Register person data.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
+        /// <param name="registration"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Encoding)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Encoding>> FaceEncodingEncodingPostWithHttpInfoAsync(Image image = default(Image), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> FaceRegistrationRegisterPostWithHttpInfoAsync(Registration registration = default(Registration), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFaceEncodingApi : IFaceEncodingApiSync, IFaceEncodingApiAsync
+    public interface IFaceRegistrationApi : IFaceRegistrationApiSync, IFaceRegistrationApiAsync
     {
 
     }
@@ -90,23 +90,23 @@ namespace FaceRecognitionDotNet.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class FaceEncodingApi : IFaceEncodingApi
+    public partial class FaceRegistrationApi : IFaceRegistrationApi
     {
         private FaceRecognitionDotNet.Client.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceEncodingApi"/> class.
+        /// Initializes a new instance of the <see cref="FaceRegistrationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public FaceEncodingApi() : this((string)null)
+        public FaceRegistrationApi() : this((string)null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceEncodingApi"/> class.
+        /// Initializes a new instance of the <see cref="FaceRegistrationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public FaceEncodingApi(String basePath)
+        public FaceRegistrationApi(String basePath)
         {
             this.Configuration = FaceRecognitionDotNet.Client.Client.Configuration.MergeConfigurations(
                 FaceRecognitionDotNet.Client.Client.GlobalConfiguration.Instance,
@@ -118,12 +118,12 @@ namespace FaceRecognitionDotNet.Client.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceEncodingApi"/> class
+        /// Initializes a new instance of the <see cref="FaceRegistrationApi"/> class
         /// using Configuration object
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public FaceEncodingApi(FaceRecognitionDotNet.Client.Client.Configuration configuration)
+        public FaceRegistrationApi(FaceRecognitionDotNet.Client.Client.Configuration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
 
@@ -137,13 +137,13 @@ namespace FaceRecognitionDotNet.Client.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceEncodingApi"/> class
+        /// Initializes a new instance of the <see cref="FaceRegistrationApi"/> class
         /// using a Configuration object and client instance.
         /// </summary>
         /// <param name="client">The client interface for synchronous API access.</param>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="configuration">The configuration object.</param>
-        public FaceEncodingApi(FaceRecognitionDotNet.Client.Client.ISynchronousClient client, FaceRecognitionDotNet.Client.Client.IAsynchronousClient asyncClient, FaceRecognitionDotNet.Client.Client.IReadableConfiguration configuration)
+        public FaceRegistrationApi(FaceRecognitionDotNet.Client.Client.ISynchronousClient client, FaceRecognitionDotNet.Client.Client.IAsynchronousClient asyncClient, FaceRecognitionDotNet.Client.Client.IReadableConfiguration configuration)
         {
             if (client == null) throw new ArgumentNullException("client");
             if (asyncClient == null) throw new ArgumentNullException("asyncClient");
@@ -197,24 +197,23 @@ namespace FaceRecognitionDotNet.Client.Api
         }
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face. 
+        /// Register person data. 
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
-        /// <returns>Encoding</returns>
-        public Encoding FaceEncodingEncodingPost(Image image = default(Image))
+        /// <param name="registration"> (optional)</param>
+        /// <returns></returns>
+        public void FaceRegistrationRegisterPost(Registration registration = default(Registration))
         {
-            FaceRecognitionDotNet.Client.Client.ApiResponse<Encoding> localVarResponse = FaceEncodingEncodingPostWithHttpInfo(image);
-            return localVarResponse.Data;
+            FaceRegistrationRegisterPostWithHttpInfo(registration);
         }
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face. 
+        /// Register person data. 
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
-        /// <returns>ApiResponse of Encoding</returns>
-        public FaceRecognitionDotNet.Client.Client.ApiResponse<Encoding> FaceEncodingEncodingPostWithHttpInfo(Image image = default(Image))
+        /// <param name="registration"> (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public FaceRecognitionDotNet.Client.Client.ApiResponse<Object> FaceRegistrationRegisterPostWithHttpInfo(Registration registration = default(Registration))
         {
             FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
 
@@ -237,15 +236,15 @@ namespace FaceRecognitionDotNet.Client.Api
             var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = image;
+            localVarRequestOptions.Data = registration;
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Encoding>("/FaceEncoding/Encoding", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Object>("/FaceRegistration/Register", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("FaceEncodingEncodingPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("FaceRegistrationRegisterPost", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -253,26 +252,25 @@ namespace FaceRecognitionDotNet.Client.Api
         }
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face. 
+        /// Register person data. 
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
+        /// <param name="registration"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Encoding</returns>
-        public async System.Threading.Tasks.Task<Encoding> FaceEncodingEncodingPostAsync(Image image = default(Image), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task FaceRegistrationRegisterPostAsync(Registration registration = default(Registration), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            FaceRecognitionDotNet.Client.Client.ApiResponse<Encoding> localVarResponse = await FaceEncodingEncodingPostWithHttpInfoAsync(image, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
+            await FaceRegistrationRegisterPostWithHttpInfoAsync(registration, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face. 
+        /// Register person data. 
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="image"> (optional)</param>
+        /// <param name="registration"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Encoding)</returns>
-        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<Encoding>> FaceEncodingEncodingPostWithHttpInfoAsync(Image image = default(Image), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<Object>> FaceRegistrationRegisterPostWithHttpInfoAsync(Registration registration = default(Registration), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
@@ -297,16 +295,16 @@ namespace FaceRecognitionDotNet.Client.Api
             var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = image;
+            localVarRequestOptions.Data = registration;
 
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Encoding>("/FaceEncoding/Encoding", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/FaceRegistration/Register", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("FaceEncodingEncodingPost", localVarResponse);
+                Exception _exception = this.ExceptionFactory("FaceRegistrationRegisterPost", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
