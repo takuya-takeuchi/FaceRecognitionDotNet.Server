@@ -42,35 +42,29 @@ namespace FaceRecognitionDotNet.Front.Controllers
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> FileUpload(List<IFormFile> files)
         {
+            if (files.Count != 1)
+                return this.View();
+
+            var formFile = files.First();
+
             var model = new DetectionViewModel();
 
-            var validFiles = files.Where(formFile => formFile != null && formFile.Length > 0).ToArray();
+            await using var ms = new MemoryStream();
+            await formFile.OpenReadStream().CopyToAsync(ms);
 
-            var images = new List<ImageViewModel>(validFiles.Length);
-            var detectAreas = new List<IEnumerable<DetectAreaModel>>(validFiles.Length);
-            this.ViewBag.Images = detectAreas;
+            using var bitmap = Image.FromStream(ms);
+            var data = ViewImage(ms.ToArray());
+            var width = bitmap.Width;
+            var height = bitmap.Height;
 
-            foreach (var formFile in validFiles)
-            {
-                await using var ms = new MemoryStream();
-                await formFile.OpenReadStream().CopyToAsync(ms);
+            model.Image = new ImageViewModel(formFile.FileName, data, width, height);
 
-                using var bitmap = Image.FromStream(ms);
-                var data = ViewImage(ms.ToArray());
-                var width = bitmap.Width;
-                var height = bitmap.Height;
-
-                images.Add(new ImageViewModel(formFile.FileName, data, width, height));
-
-                var areas = new List<DetectAreaModel>();
-                var detect = this._FaceDetectionService.Locations(ms.ToArray());
-                if (detect != null)
-                    areas.AddRange(detect);
-                detectAreas.Add(areas);
-            }
-
-            model.Images = images.ToArray();
-            model.DetectAreas = detectAreas.ToArray();
+            var areas = new List<DetectAreaModel>();
+            var detect = this._FaceDetectionService.Locations(ms.ToArray());
+            if (detect != null)
+                areas.AddRange(detect);
+            
+            model.DetectAreas = areas.ToArray();
 
             return this.View(nameof(this.Index), model);
         }

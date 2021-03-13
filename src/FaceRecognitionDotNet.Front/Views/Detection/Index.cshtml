@@ -41,32 +41,29 @@
 </form>
 
 <table>
-    @if (@Model?.Images != null)
+    @if (@Model?.Image != null)
     {
-        for (var index = 0; index < @Model.Images.Length; index++)
+        var image = @Model.Image;
+        var detectAreas = @Model.DetectAreas;
+
+        if (!string.IsNullOrEmpty(@image.Data))
         {
-            var image = @Model.Images[index];
-            var detectAreas = @Model.DetectAreas[index];
+            var areas = @Html.Raw(Json.Serialize(detectAreas));
 
-            if (!string.IsNullOrEmpty(@image.Data))
-            {
-                var areas = @Html.Raw(Json.Serialize(detectAreas));
+            <tr>
+                <td>@image.Name (@image.Width x @image.Height)</td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="SrcCanvas"
+                            style="height: 100%; width: 100%;">
+                    </canvas>
 
-                <tr>
-                    <td>@image.Name (@image.Width x @image.Height)</td>
-                </tr>
-                <tr>
-                    <td>
-                        <canvas id="SrcCanvas"
-                                style="height: 100%; width: 100%;">
-                        </canvas>
-
-                        <script type="text/javascript">
-                            draw_detect_result('@Html.Raw(@image.Data)', @areas);
-                        </script>
-                    </td>
-                </tr>
-            }
+                    <script type="text/javascript">
+                        draw_detect_result('@Html.Raw(@image.Data)', @areas);
+                    </script>
+                </td>
+            </tr>
         }
     }
 </table>
