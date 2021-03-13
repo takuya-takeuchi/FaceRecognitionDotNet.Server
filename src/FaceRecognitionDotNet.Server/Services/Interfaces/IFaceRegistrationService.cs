@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FaceRecognitionDotNet.Server.Helpers;
+﻿using System.Threading.Tasks;
 using FaceRecognitionDotNet.Server.Models;
 
 namespace FaceRecognitionDotNet.Server.Services.Interfaces
@@ -8,7 +7,7 @@ namespace FaceRecognitionDotNet.Server.Services.Interfaces
     public interface IFaceRegistrationService
     {
 
-        Encoding Encoding(IResource<FaceRecognition> resource, byte[] data);
+        Task Register(Registration registration);
 
     }
 

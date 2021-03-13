@@ -100,6 +100,11 @@
             A create datetime of this registered person data.
             </summary>
         </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.Photo">
+            <summary>
+            A person photo data.
+            </summary>
+        </member>
         <member name="T:FaceRecognitionDotNet.Server.Models.Demographics">
             <summary>
             Represents a demographics data.
