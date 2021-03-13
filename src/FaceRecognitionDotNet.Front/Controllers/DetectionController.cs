@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using FaceRecognitionDotNet.Client;
 using FaceRecognitionDotNet.Client.Api;
+using FaceRecognitionDotNet.Front.Models;
 
 namespace FaceRecognitionDotNet.Front.Controllers
 {
@@ -21,15 +22,13 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
         public IActionResult Index()
         {
-            this.ViewBag.Images = null;
-            return View();
+            return this.View();
         }
 
         [HttpPost("UploadFiles")]
         public async Task<IActionResult> FileUpload(List<IFormFile> files)
         {
-            // 保存先を取得
-            var filePath = @"C:\work\";
+            var model = new DetectionViewModel();
 
             var validFiles = files.Where(formFile => formFile != null && formFile.Length > 0).ToArray();
 
@@ -44,8 +43,8 @@ namespace FaceRecognitionDotNet.Front.Controllers
             }
 
             //this.ViewData["uploadResult"] = Ok(new { count = files.Count, size, filePath }).Value.ToString();
-
-            return View(nameof(this.Index));
+            model.Images = list.Select(s => new ImageViewModel { Data = s }).ToArray();
+            return this.View(nameof(this.Index), model);
         }
 
         #region Helpers
