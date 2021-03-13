@@ -1,0 +1,59 @@
+﻿
+@model FaceRecognitionDotNet.Front.Models.DetectionViewModel
+
+@{
+   
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Upload image file to detect face</p>
+
+<script src="~/js/canvas.js"></script>
+<style type="text/css">
+    canvas {
+        border: solid 3px #000;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data" asp-controller="Detection" asp-action="FileUpload">
+    <div class="form-group">
+        <div class="col-md-4">
+            <input type="file" name="files" multiple />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+</form>
+
+<table>
+    @if (@Model?.Images != null)
+    {
+        for (var index = 0; index < @Model.Images.Length; index++)
+        {
+            var image = @Model.Images[index];
+            var detectAreas = @Model.DetectAreas[index];
+
+            if (!string.IsNullOrEmpty(@image.Data))
+            {
+                var areas = @Html.Raw(Json.Serialize(detectAreas));
+
+                <tr>
+                    <td>@image.Name (@image.Width x @image.Height)</td>
+                </tr>
+                <tr>
+                    <td>
+                        <canvas id="SrcCanvas"
+                                style="height: 100%; width: 100%;">
+                        </canvas>
+
+                        <script type="text/javascript">
+                            draw_detect_result('@Html.Raw(@image.Data)', @areas);
+                        </script>
+                    </td>
+                </tr>
+            }
+        }
+    }
+</table>

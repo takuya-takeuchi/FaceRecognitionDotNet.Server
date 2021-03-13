@@ -55,6 +55,46 @@
             </summary>
             <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
         </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Databases.FeatureData">
+            <summary>
+            Represents a feature data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.Id">
+            <summary>
+            A Id of this feature data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.RegisteredPersonId">
+            <summary>
+            A Id that links to registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.Encoding">
+            <summary>
+            A face encoding data.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson">
+            <summary>
+            Represents a person who be registered to database.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.Id">
+            <summary>
+            A Id of this registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.Name">
+            <summary>
+            A name of this registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.CreatedDateTime">
+            <summary>
+            A create datetime of this registered person data.
+            </summary>
+        </member>
         <member name="T:FaceRecognitionDotNet.Server.Models.Encdoing">
             <summary>
             Represents a feature data of face.
