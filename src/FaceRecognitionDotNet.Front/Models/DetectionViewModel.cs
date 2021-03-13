@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-
 namespace FaceRecognitionDotNet.Front.Models
 {
 
     public sealed class DetectionViewModel
     {
+
+        #region Properties
 
         public ImageViewModel Image
         {
@@ -17,6 +17,8 @@ namespace FaceRecognitionDotNet.Front.Models
             get;
             set;
         }
+
+        #endregion
 
     }
 

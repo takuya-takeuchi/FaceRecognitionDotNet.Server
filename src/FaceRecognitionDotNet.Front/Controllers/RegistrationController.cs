@@ -14,7 +14,7 @@ using FaceRecognitionDotNet.Front.Services.Interfaces;
 namespace FaceRecognitionDotNet.Front.Controllers
 {
 
-    public sealed class DetectionController : Controller
+    public sealed class RegistrationController : Controller
     {
 
         #region Fields
@@ -25,7 +25,7 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
         #region Constructors
 
-        public DetectionController(IFaceDetectionService faceDetectionService)
+        public RegistrationController(IFaceDetectionService faceDetectionService)
         {
             this._FaceDetectionService = faceDetectionService;
         }
@@ -39,32 +39,31 @@ namespace FaceRecognitionDotNet.Front.Controllers
             return this.View();
         }
 
-        [HttpPost("UploadFiles")]
-        public async Task<IActionResult> FileUpload(List<IFormFile> files)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Submit(RegistrationViewModel model)
         {
-            if (files.Count != 1)
-                return this.View(nameof(this.Index));
-
-            var formFile = files.First();
-
-            var model = new DetectionViewModel();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(nameof(this.Index), model);
+            }
 
             await using var ms = new MemoryStream();
-            await formFile.OpenReadStream().CopyToAsync(ms);
+            await model.Photo.OpenReadStream().CopyToAsync(ms);
 
             using var bitmap = Image.FromStream(ms);
             var data = ViewImage(ms.ToArray());
             var width = bitmap.Width;
             var height = bitmap.Height;
 
-            model.Image = new ImageViewModel(formFile.FileName, data, width, height);
+            //model.Image = new ImageViewModel(formFile.FileName, data, width, height);
 
-            var areas = new List<DetectAreaModel>();
-            var detect = this._FaceDetectionService.Locations(ms.ToArray());
-            if (detect != null)
-                areas.AddRange(detect);
-            
-            model.DetectAreas = areas.ToArray();
+            //var areas = new List<DetectAreaModel>();
+            //var detect = this._FaceDetectionService.Locations(ms.ToArray());
+            //if (detect != null)
+            //    areas.AddRange(detect);
+
+            //model.DetectAreas = areas.ToArray();
 
             return this.View(nameof(this.Index), model);
         }
