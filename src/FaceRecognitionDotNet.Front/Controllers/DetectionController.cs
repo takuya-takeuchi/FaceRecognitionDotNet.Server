@@ -32,18 +32,23 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
             var validFiles = files.Where(formFile => formFile != null && formFile.Length > 0).ToArray();
 
-            var list = new List<string>(validFiles.Length);
+            var list = new List<ImageViewModel>(validFiles.Length);
             this.ViewBag.Images = list;
 
             foreach (var formFile in validFiles)
             {
                 await using var ms = new MemoryStream();
                 await formFile.OpenReadStream().CopyToAsync(ms);
-                list.Add(ViewImage(ms.ToArray()));
-            }
 
-            //this.ViewData["uploadResult"] = Ok(new { count = files.Count, size, filePath }).Value.ToString();
-            model.Images = list.Select(s => new ImageViewModel { Data = s }).ToArray();
+                using var bitmap = Bitmap.FromStream(ms);
+                var data = ViewImage(ms.ToArray());
+                var width = bitmap.Width;
+                var height = bitmap.Height;
+                list.Add(new ImageViewModel(formFile.FileName, data, width, height));
+            }
+            
+            model.Images = list.ToArray();
+
             return this.View(nameof(this.Index), model);
         }
 
