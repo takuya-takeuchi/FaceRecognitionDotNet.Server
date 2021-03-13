@@ -8,14 +8,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using FaceRecognitionDotNet.Client.Api;
 using FaceRecognitionDotNet.Front.Models;
+using FaceRecognitionDotNet.Front.Services.Interfaces;
 
 namespace FaceRecognitionDotNet.Front.Controllers
 {
 
     public class DetectionController : Controller
     {
+
+        #region Fields
+
+        private readonly IFaceDetectionService _FaceDetectionService;
+
+        #endregion
+
+        #region Constructors
+
+        public DetectionController(IFaceDetectionService faceDetectionService)
+        {
+            this._FaceDetectionService = faceDetectionService;
+        }
+
+        #endregion
 
         #region Methods
 
@@ -48,8 +63,9 @@ namespace FaceRecognitionDotNet.Front.Controllers
                 images.Add(new ImageViewModel(formFile.FileName, data, width, height));
 
                 var areas = new List<DetectAreaModel>();
-                //areas.Add(new DetectAreaModel(100, 100, 200, 200, 0.8f));
-                areas.AddRange(DetectFace("http://localhost:9000", ms.ToArray()));
+                var detect = this._FaceDetectionService.Locations(ms.ToArray());
+                if (detect != null)
+                    areas.AddRange(detect);
                 detectAreas.Add(areas);
             }
 
@@ -60,36 +76,6 @@ namespace FaceRecognitionDotNet.Front.Controllers
         }
 
         #region Helpers
-
-        [NonAction]
-        private IEnumerable<DetectAreaModel> DetectFace(string url, byte[] image)
-        {
-            var results = new List<DetectAreaModel>();
-
-            var api = new FaceDetectionApi(url);
-
-            try
-            {
-                var target = new Client.Model.Image(image);
-                var result = api.FaceDetectionLocationsPostWithHttpInfo(target);
-                if (result.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    return null;
-                }
-
-                results.AddRange(result.Data.Select(area => new DetectAreaModel(area.Left,
-                                                                                area.Top,
-                                                                                area.Right - area.Left,
-                                                                                area.Bottom - area.Top,
-                                                                                0)));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return results;
-        }
 
         [NonAction]
         private static string ViewImage(byte[] arrayImage)
