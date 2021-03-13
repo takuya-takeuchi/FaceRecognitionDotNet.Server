@@ -71,6 +71,7 @@ namespace FaceRecognitionDotNet.Front
         private static void ConfigureApplicationServices(IServiceCollection services)
         {
             services.AddTransient<IFaceDetectionService, FaceDetectionService>();
+            services.AddTransient<IFaceRegistrationService, FaceRegistrationService>();
         }
 
         #endregion

@@ -19,15 +19,15 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
         #region Fields
 
-        private readonly IFaceDetectionService _FaceDetectionService;
+        private readonly IFaceRegistrationService _FaceRegistrationService;
 
         #endregion
 
         #region Constructors
 
-        public RegistrationController(IFaceDetectionService faceDetectionService)
+        public RegistrationController(IFaceRegistrationService faceRegistrationService)
         {
-            this._FaceDetectionService = faceDetectionService;
+            this._FaceRegistrationService = faceRegistrationService;
         }
 
         #endregion
@@ -56,6 +56,7 @@ namespace FaceRecognitionDotNet.Front.Controllers
             var width = bitmap.Width;
             var height = bitmap.Height;
 
+            var detect = this._FaceRegistrationService.Register(ms.ToArray());
             //model.Image = new ImageViewModel(formFile.FileName, data, width, height);
 
             //var areas = new List<DetectAreaModel>();
