@@ -53,7 +53,7 @@ namespace FaceRecognitionDotNet.Server.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<Encdoing> Encoding([FromBody] Models.Image image)
+        public ActionResult<Encoding> Encoding([FromBody] Models.Image image)
         {
             IResource<FaceRecognition> resource = null;
 

@@ -5,7 +5,7 @@ using FaceRecognitionDotNet.Server.Models;
 namespace FaceRecognitionDotNet.Server.Services.Interfaces
 {
 
-    public interface IFaceEncodingService
+    public interface IFaceRegistrationService
     {
 
         Encoding Encoding(IResource<FaceRecognition> resource, byte[] data);

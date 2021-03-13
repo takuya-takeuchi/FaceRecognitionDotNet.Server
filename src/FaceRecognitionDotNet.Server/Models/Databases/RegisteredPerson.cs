@@ -21,9 +21,18 @@ namespace FaceRecognitionDotNet.Server.Models.Databases
         }
 
         /// <summary>
-        /// A name of this registered person.
+        /// A first name of this registered person.
         /// </summary>
-        public string Name
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A last name of this registered person.
+        /// </summary>
+        public string LastName
         {
             get;
             set;

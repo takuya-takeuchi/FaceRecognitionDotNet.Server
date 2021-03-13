@@ -50,7 +50,7 @@ namespace FaceRecognitionDotNet.Server
 
             ConfigureApplicationServices(services);
 
-            services.AddDbContext<LocalDbContext>(options =>
+            services.AddDbContext<PostgreSqlDbContext>(options =>
                 options.UseNpgsql(this.Configuration.GetConnectionString("PostgreSQLConnection")));
         }
 

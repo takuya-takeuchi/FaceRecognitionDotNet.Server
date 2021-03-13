@@ -13,7 +13,7 @@ namespace FaceRecognitionDotNet.Server.Services
     public sealed class FaceEncodingService : IFaceEncodingService
     {
 
-        public Encdoing Encoding(IResource<FaceRecognition> resource, byte[] data)
+        public Encoding Encoding(IResource<FaceRecognition> resource, byte[] data)
         {
             if (resource == null)
                 throw new ArgumentNullException(nameof(resource));
@@ -25,7 +25,7 @@ namespace FaceRecognitionDotNet.Server.Services
             using var faceImage = FaceRecognition.LoadImage(bitmap);
             var location = new Location(0, 0, bitmap.Width, bitmap.Height);
             var encodings = resource.Object.FaceEncodings(faceImage, new []{ location }, 1, PredictorModel.Large);
-            return new Encdoing()
+            return new Encoding()
             {
                 Data = encodings.First().GetRawEncoding()
             };

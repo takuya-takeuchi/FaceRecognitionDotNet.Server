@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 namespace FaceRecognitionDotNet.Server.Data
 {
     
-    public sealed class LocalDbContext : DbContext
+    public sealed class PostgreSqlDbContext : DbContext
     {
 
         #region Constructors
 
-        public LocalDbContext(DbContextOptions options)
+        public PostgreSqlDbContext(DbContextOptions options)
             : base(options)
         {
         }
