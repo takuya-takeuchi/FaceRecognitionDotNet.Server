@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using FaceRecognitionDotNet.Server.Data;
 using FaceRecognitionDotNet.Server.Models;
@@ -57,7 +58,7 @@ namespace FaceRecognitionDotNet.Server.Services
 
                 transaction.Commit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: Handle failure
             }
