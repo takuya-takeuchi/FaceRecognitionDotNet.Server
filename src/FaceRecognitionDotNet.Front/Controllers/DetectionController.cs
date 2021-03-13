@@ -48,7 +48,8 @@ namespace FaceRecognitionDotNet.Front.Controllers
                 images.Add(new ImageViewModel(formFile.FileName, data, width, height));
 
                 var areas = new List<DetectAreaModel>();
-                areas.Add(new DetectAreaModel(100, 100, 200, 200, 0.8f));
+                //areas.Add(new DetectAreaModel(100, 100, 200, 200, 0.8f));
+                areas.AddRange(DetectFace("http://localhost:9000", ms.ToArray()));
                 detectAreas.Add(areas);
             }
 
@@ -61,40 +62,33 @@ namespace FaceRecognitionDotNet.Front.Controllers
         #region Helpers
 
         [NonAction]
-        private void DetectFace(string url, string file)
+        private IEnumerable<DetectAreaModel> DetectFace(string url, byte[] image)
         {
+            var results = new List<DetectAreaModel>();
+
             var api = new FaceDetectionApi(url);
+
             try
             {
-                var image = new Client.Model.Image(System.IO.File.ReadAllBytes(file));
-                var result = api.FaceDetectionLocationsPostWithHttpInfo(image);
+                var target = new Client.Model.Image(image);
+                var result = api.FaceDetectionLocationsPostWithHttpInfo(target);
                 if (result.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    Console.WriteLine($"[Error] {nameof(FaceDetectionApi)} returns {result.StatusCode}");
-                    return;
+                    return null;
                 }
 
-                Console.WriteLine($"[Info] Find {result.Data.Count} faces");
-
-                //using var ms = new MemoryStream(image.Data);
-                //using var bitmap = (Bitmap)Image.FromStream(ms);
-                //using var g = Graphics.FromImage(bitmap);
-                //using var pen = new Pen(Color.Red, 2);
-                //foreach (var area in result.Data)
-                //{
-                //    var x = area.Left;
-                //    var y = area.Top;
-                //    var w = area.Right - x;
-                //    var h = area.Bottom - y;
-                //    g.DrawRectangle(pen, x, y, w, h);
-                //}
-
-                //bitmap.Save("result.jpg");
+                results.AddRange(result.Data.Select(area => new DetectAreaModel(area.Left,
+                                                                                area.Top,
+                                                                                area.Right - area.Left,
+                                                                                area.Bottom - area.Top,
+                                                                                0)));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
+            return results;
         }
 
         [NonAction]

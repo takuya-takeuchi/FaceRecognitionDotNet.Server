@@ -12,7 +12,7 @@ using NLog;
 namespace FaceRecognitionDotNet.Server
 {
 
-    public class Program
+    internal sealed class Program
     {
 
         #region Fields
