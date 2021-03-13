@@ -27,6 +27,22 @@ namespace FaceRecognitionDotNet.Client.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Registration&gt;</returns>
+        List<Registration> FaceRegistrationGetAllPost();
+
+        /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Registration&gt;</returns>
+        ApiResponse<List<Registration>> FaceRegistrationGetAllPostWithHttpInfo();
+        /// <summary>
         /// Register person data.
         /// </summary>
         /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -53,6 +69,27 @@ namespace FaceRecognitionDotNet.Client.Api
     public interface IFaceRegistrationApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;Registration&gt;</returns>
+        System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;Registration&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Registration>>> FaceRegistrationGetAllPostWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register person data.
         /// </summary>
@@ -194,6 +231,111 @@ namespace FaceRecognitionDotNet.Client.Api
                 return _exceptionFactory;
             }
             set { _exceptionFactory = value; }
+        }
+
+        /// <summary>
+        /// Get all registered person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Registration&gt;</returns>
+        public List<Registration> FaceRegistrationGetAllPost()
+        {
+            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = FaceRegistrationGetAllPostWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get all registered person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Registration&gt;</returns>
+        public FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> FaceRegistrationGetAllPostWithHttpInfo()
+        {
+            FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+            var localVarContentType = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllPost", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get all registered person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;Registration&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Registration>> FaceRegistrationGetAllPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>> localVarResponse = await FaceRegistrationGetAllPostWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get all registered person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;Registration&gt;)</returns>
+        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<List<Registration>>> FaceRegistrationGetAllPostWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+
+            var localVarContentType = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<List<Registration>>("/FaceRegistration/GetAll", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FaceRegistrationGetAllPost", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>

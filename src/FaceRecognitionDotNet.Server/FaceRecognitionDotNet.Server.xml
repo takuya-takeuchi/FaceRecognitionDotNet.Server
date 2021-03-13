@@ -50,6 +50,11 @@
             <param name="faceRegistrationService">The service provide face detect functions.</param>
             <param name="logger">The logger.</param>
         </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.GetAll">
+            <summary>
+            Get all registered person data.
+            </summary>
+        </member>
         <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.Register(FaceRecognitionDotNet.Server.Models.Registration)">
             <summary>
             Register person data.

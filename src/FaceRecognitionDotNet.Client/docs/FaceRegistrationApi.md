@@ -4,8 +4,74 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**FaceRegistrationGetAllPost**](FaceRegistrationApi.md#faceregistrationgetallpost) | **POST** /FaceRegistration/GetAll | Get all registered person data.
 [**FaceRegistrationRegisterPost**](FaceRegistrationApi.md#faceregistrationregisterpost) | **POST** /FaceRegistration/Register | Register person data.
 
+
+<a name="faceregistrationgetallpost"></a>
+# **FaceRegistrationGetAllPost**
+> List&lt;Registration&gt; FaceRegistrationGetAllPost ()
+
+Get all registered person data.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using FaceRecognitionDotNet.Client.Api;
+using FaceRecognitionDotNet.Client.Client;
+using FaceRecognitionDotNet.Client.Model;
+
+namespace Example
+{
+    public class FaceRegistrationGetAllPostExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new FaceRegistrationApi(config);
+
+            try
+            {
+                // Get all registered person data.
+                List<Registration> result = apiInstance.FaceRegistrationGetAllPost();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling FaceRegistrationApi.FaceRegistrationGetAllPost: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;Registration&gt;**](Registration.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **500** | Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="faceregistrationregisterpost"></a>
 # **FaceRegistrationRegisterPost**
@@ -72,7 +138,6 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Success |  -  |
 | **400** | Bad Request |  -  |
-| **429** | Client Error |  -  |
 | **500** | Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

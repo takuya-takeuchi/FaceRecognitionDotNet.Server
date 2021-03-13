@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore.Storage;
@@ -30,6 +32,52 @@ namespace FaceRecognitionDotNet.Server.Services
         #endregion
 
         #region IFaceRegistrationService Members
+
+        public Task<IEnumerable<Registration>> GetAll()
+        {
+            var resuls = new List<Registration>();
+
+            try
+            {
+                var context = this._DatabaseContext;
+
+                var registeredPersons = context.RegisteredPersons.ToArray();
+                var featureDatum = context.FeatureDatum.ToArray();
+
+                foreach (var registeredPerson in registeredPersons.ToArray())
+                {
+                    var person = new Registration()
+                    {
+                        Demographics = new Demographics
+                        {
+                            FirstName = registeredPerson.FirstName,
+                            LastName = registeredPerson.LastName,
+                            CreatedDateTime = registeredPerson.CreatedDateTime
+                        },
+                        Photo = new Models.Image
+                        {
+                            Data = registeredPerson.Photo
+                        }
+                    };
+
+                    var feature = featureDatum.FirstOrDefault(data => data.RegisteredPersonId == registeredPerson.Id);
+
+                    var encoding = new double[feature.Encoding.Length / sizeof(double)];
+                    Buffer.BlockCopy(feature.Encoding, 0, encoding, 0, encoding.Length);
+
+                    person.Encoding = new Encoding
+                    {
+                        Data = encoding
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle failure
+            }
+
+            return Task.FromResult((IEnumerable<Registration>)resuls);
+        }
 
         public Task Register(Registration registration)
         {

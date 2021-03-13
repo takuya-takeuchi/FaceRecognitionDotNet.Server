@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -44,13 +45,32 @@ namespace FaceRecognitionDotNet.Server.Controllers
         #region Methods
 
         /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        [Route("GetAll")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<IEnumerable<Registration>> GetAll()
+        {
+            try
+            {
+                return Ok(this._FaceRegistrationService.GetAll());
+            }
+            catch (Exception e)
+            {
+                this._Logger.LogError($"[{nameof(this.Register)}] {e.Message}");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
         /// Register person data.
         /// </summary>
         [Route("Register")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Register([FromBody] Registration registration)
         {
