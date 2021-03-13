@@ -9,21 +9,12 @@
 
 <p>Upload image file to detect face</p>
 
+<script src="~/js/canvas.js"></script>
 <style type="text/css">
     canvas {
         border: solid 3px #000;
     }
 </style>
-
-@*
-
-    <canvas id="SrcCanvas"
-            style="height:90%;width:100%;"></canvas>
-
-    <script src="~/js/canvas.js"></script>
-    <script type="text/javascript">
-        canvas_init("/img/work.img");
-    </script>*@
 
 <form method="post" enctype="multipart/form-data" asp-controller="Detection" asp-action="FileUpload">
     <div class="form-group">
@@ -51,7 +42,6 @@
                         <canvas id="SrcCanvas"
                                 style="height:90%;width:100%;"></canvas>
 
-                        <script src="~/js/canvas.js"></script>
                         <script type="text/javascript">
                             canvas_init('@Html.Raw(@image.Data)');
                         </script>
