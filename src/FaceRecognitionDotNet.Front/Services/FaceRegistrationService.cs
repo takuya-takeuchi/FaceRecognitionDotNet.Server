@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -7,7 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 using FaceRecognitionDotNet.Client.Api;
+using FaceRecognitionDotNet.Client.Model;
+using FaceRecognitionDotNet.Front.Models;
 using FaceRecognitionDotNet.Front.Services.Interfaces;
+using Image = System.Drawing.Image;
 
 namespace FaceRecognitionDotNet.Front.Services
 {
@@ -32,10 +36,11 @@ namespace FaceRecognitionDotNet.Front.Services
 
         #region IFaceDetectionService Members
 
-        public async Task<string> Register(byte[] image)
+        public async Task<string> Register(RegistrationViewModel registrationViewModel, byte[] image)
         {
             var faceDetectionApi = new FaceDetectionApi(this._EndPointUrl);
             var faceEncodingApi = new FaceEncodingApi(this._EndPointUrl);
+            var faceRegistrationApi = new FaceRegistrationApi(this._EndPointUrl);
 
             try
             {
@@ -76,8 +81,21 @@ namespace FaceRecognitionDotNet.Front.Services
                 {
                     return "Failed to invoke service";
                 }
+                
+                var registration = new Registration
+                (
+                    new Demographics(registrationViewModel.FirstName,
+                                     registrationViewModel.LastName,
+                                     DateTime.UtcNow),
+                    new Encoding(encodingResult.Data.Data),
+                    new Client.Model.Image(croppedMemoryStream.ToArray())
+                );
 
-                var encoding = encodingResult.Data;
+                var registrationResult = await faceRegistrationApi.FaceRegistrationRegisterPostWithHttpInfoAsync(registration);
+                if (registrationResult.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return "Failed to register";
+                }
             }
             catch (Exception e)
             {

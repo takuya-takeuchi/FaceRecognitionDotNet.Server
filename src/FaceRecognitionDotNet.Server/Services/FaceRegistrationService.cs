@@ -42,7 +42,7 @@ namespace FaceRecognitionDotNet.Server.Services
                     FirstName = registration.Demographics.FirstName,
                     LastName = registration.Demographics.LastName,
                     Photo = registration.Photo.Data,
-                    CreatedDateTime = DateTime.UtcNow
+                    CreatedDateTime = registration.Demographics.CreatedDateTime
                 });
                 
                 var encoding = new byte[registration.Encoding.Data.Length * sizeof(double)];

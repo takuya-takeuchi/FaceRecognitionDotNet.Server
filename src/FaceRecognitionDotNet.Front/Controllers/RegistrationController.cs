@@ -56,15 +56,7 @@ namespace FaceRecognitionDotNet.Front.Controllers
             var width = bitmap.Width;
             var height = bitmap.Height;
 
-            var detect = this._FaceRegistrationService.Register(ms.ToArray());
-            //model.Image = new ImageViewModel(formFile.FileName, data, width, height);
-
-            //var areas = new List<DetectAreaModel>();
-            //var detect = this._FaceDetectionService.Locations(ms.ToArray());
-            //if (detect != null)
-            //    areas.AddRange(detect);
-
-            //model.DetectAreas = areas.ToArray();
+            var result = this._FaceRegistrationService.Register(model, ms.ToArray());
 
             return this.View(nameof(this.Index), model);
         }
