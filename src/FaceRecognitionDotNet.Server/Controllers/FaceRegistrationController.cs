@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-using FaceRecognitionDotNet.Server.Helpers;
 using FaceRecognitionDotNet.Server.Models;
 using FaceRecognitionDotNet.Server.Services.Interfaces;
 
@@ -11,16 +10,16 @@ namespace FaceRecognitionDotNet.Server.Controllers
 {
 
     /// <summary>
-    /// Get feature data of face.
+    /// Post person data.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class FaceEncodingController : ControllerBase
+    public class FaceRegistrationController : ControllerBase
     {
 
         #region Fields
 
-        private readonly IFaceEncodingService _FaceEncodingService;
+        private readonly IFaceRegistrationService _FaceRegistrationService;
 
         private readonly ILogger<FaceEncodingController> _Logger;
 
@@ -29,14 +28,14 @@ namespace FaceRecognitionDotNet.Server.Controllers
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FaceEncodingController"/> class with <see cref="IFaceEncodingService"/> and logger.
+        /// Initializes a new instance of the <see cref="FaceRegistrationController"/> class with <see cref="IFaceRegistrationService"/> and logger.
         /// </summary>
-        /// <param name="faceEncodingService">The service provide face detect functions.</param>
+        /// <param name="faceRegistrationService">The service provide face detect functions.</param>
         /// <param name="logger">The logger.</param>
-        public FaceEncodingController(IFaceEncodingService faceEncodingService,
-                                      ILogger<FaceEncodingController> logger)
+        public FaceRegistrationController(IFaceRegistrationService faceRegistrationService,
+                                          ILogger<FaceEncodingController> logger)
         {
-            this._FaceEncodingService = faceEncodingService;
+            this._FaceRegistrationService = faceRegistrationService;
             this._Logger = logger;
         }
 
@@ -45,33 +44,24 @@ namespace FaceRecognitionDotNet.Server.Controllers
         #region Methods
 
         /// <summary>
-        /// Returns an face feature data from image contains a human face.
+        /// Register person data.
         /// </summary>
-        [Route("Encoding")]
+        [Route("Register")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<Encoding> Encoding([FromBody] Models.Image image)
+        public ActionResult Register([FromBody] Registration registration)
         {
-            IResource<FaceRecognition> resource = null;
-
             try
             {
-                if (!Cache.TryGetResource(out resource))
-                    return new StatusCodeResult(StatusCodes.Status429TooManyRequests);
-
-                return Ok(this._FaceEncodingService.Encoding(resource, image.Data));
+                return Ok(this._FaceRegistrationService.Register(registration));
             }
             catch (Exception e)
             {
-                this._Logger.LogError($"[{nameof(this.Encoding)}] {e.Message}");
+                this._Logger.LogError($"[{nameof(this.Register)}] {e.Message}");
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-            finally
-            {
-                resource?.Dispose();
             }
         }
 

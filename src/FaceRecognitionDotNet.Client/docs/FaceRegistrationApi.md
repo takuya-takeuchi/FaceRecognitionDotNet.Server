@@ -1,17 +1,17 @@
-# FaceRecognitionDotNet.Client.Api.FaceEncodingApi
+# FaceRecognitionDotNet.Client.Api.FaceRegistrationApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FaceEncodingEncodingPost**](FaceEncodingApi.md#faceencodingencodingpost) | **POST** /FaceEncoding/Encoding | Returns an face feature data from image contains a human face.
+[**FaceRegistrationRegisterPost**](FaceRegistrationApi.md#faceregistrationregisterpost) | **POST** /FaceRegistration/Register | Register person data.
 
 
-<a name="faceencodingencodingpost"></a>
-# **FaceEncodingEncodingPost**
-> Encoding FaceEncodingEncodingPost (Image image = null)
+<a name="faceregistrationregisterpost"></a>
+# **FaceRegistrationRegisterPost**
+> void FaceRegistrationRegisterPost (Registration registration = null)
 
-Returns an face feature data from image contains a human face.
+Register person data.
 
 ### Example
 ```csharp
@@ -23,24 +23,23 @@ using FaceRecognitionDotNet.Client.Model;
 
 namespace Example
 {
-    public class FaceEncodingEncodingPostExample
+    public class FaceRegistrationRegisterPostExample
     {
         public static void Main()
         {
             Configuration config = new Configuration();
             config.BasePath = "http://localhost";
-            var apiInstance = new FaceEncodingApi(config);
-            var image = new Image(); // Image |  (optional) 
+            var apiInstance = new FaceRegistrationApi(config);
+            var registration = new Registration(); // Registration |  (optional) 
 
             try
             {
-                // Returns an face feature data from image contains a human face.
-                Encoding result = apiInstance.FaceEncodingEncodingPost(image);
-                Debug.WriteLine(result);
+                // Register person data.
+                apiInstance.FaceRegistrationRegisterPost(registration);
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling FaceEncodingApi.FaceEncodingEncodingPost: " + e.Message );
+                Debug.Print("Exception when calling FaceRegistrationApi.FaceRegistrationRegisterPost: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -53,11 +52,11 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **image** | [**Image**](Image.md)|  | [optional] 
+ **registration** | [**Registration**](Registration.md)|  | [optional] 
 
 ### Return type
 
-[**Encoding**](Encoding.md)
+void (empty response body)
 
 ### Authorization
 

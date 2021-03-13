@@ -64,8 +64,8 @@ namespace FaceRecognitionDotNet.Server
 
                 try
                 {
-                    var context = services.GetRequiredService<LocalDbContext>();
-                    DatabaseInitializer<LocalDbContext>.Initialize(context);
+                    var context = services.GetRequiredService<PostgreSqlDbContext>();
+                    DatabaseInitializer<PostgreSqlDbContext>.Initialize(context);
                 }
                 catch (Exception ex)
                 {

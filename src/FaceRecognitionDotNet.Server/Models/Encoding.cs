@@ -4,7 +4,7 @@ namespace FaceRecognitionDotNet.Server.Models
     /// <summary>
     /// Represents a feature data of face.
     /// </summary>
-    public class Encdoing
+    public class Encoding
     {
 
         #region Properties

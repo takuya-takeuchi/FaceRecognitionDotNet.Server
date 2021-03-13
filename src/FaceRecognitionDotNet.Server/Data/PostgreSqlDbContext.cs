@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 namespace FaceRecognitionDotNet.Server.Data
 {
     
-    public sealed class LocalDbContext : DbContext
+    public sealed class PostgreSqlDbContext : DbContext
     {
 
         #region Constructors
 
-        public LocalDbContext(DbContextOptions options)
+        public PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options)
             : base(options)
         {
         }
@@ -18,9 +18,9 @@ namespace FaceRecognitionDotNet.Server.Data
 
         #region Properties
 
-        public System.Data.Entity.DbSet<FeatureData> FeatureDatum { get; set; }
+        public DbSet<FeatureData> FeatureDatum { get; set; }
         
-        public System.Data.Entity.DbSet<RegisteredPerson> RegisteredPersons { get; set; }
+        public DbSet<RegisteredPerson> RegisteredPersons { get; set; }
 
         #endregion
 
@@ -32,6 +32,8 @@ namespace FaceRecognitionDotNet.Server.Data
         {
             modelBuilder.Entity<FeatureData>().ToTable("FeatureData");
             modelBuilder.Entity<RegisteredPerson>().ToTable("RegisteredPerson");
+
+            base.OnModelCreating(modelBuilder);
         }
 
         #endregion

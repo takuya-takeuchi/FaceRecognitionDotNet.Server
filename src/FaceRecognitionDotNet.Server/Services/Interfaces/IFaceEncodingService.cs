@@ -8,7 +8,7 @@ namespace FaceRecognitionDotNet.Server.Services.Interfaces
     public interface IFaceEncodingService
     {
 
-        Encdoing Encoding(IResource<FaceRecognition> resource, byte[] data);
+        Encoding Encoding(IResource<FaceRecognition> resource, byte[] data);
 
     }
 

@@ -1,42 +1,41 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace FaceRecognitionDotNet.Server.Models.Databases
+namespace FaceRecognitionDotNet.Server.Models
 {
 
     /// <summary>
-    /// Represents a feature data.
+    /// Represents a registration data.
     /// </summary>
-    public sealed class FeatureData
+    public sealed class Registration
     {
 
         #region Properties
 
         /// <summary>
-        /// A Id of this feature data.
+        /// The person demographics data.
         /// </summary>
         [Required]
-        public Guid Id
+        public Demographics Demographics
         {
             get;
             set;
         }
 
         /// <summary>
-        /// A Id that links to registered person.
+        /// The face encoding data.
         /// </summary>
         [Required]
-        public Guid RegisteredPersonId
+        public Encoding Encoding
         {
             get;
             set;
         }
 
         /// <summary>
-        /// A face encoding data.
+        /// The photo data.
         /// </summary>
         [Required]
-        public byte[] Encoding
+        public Image Photo
         {
             get;
             set;

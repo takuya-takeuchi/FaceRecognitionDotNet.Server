@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FaceRecognitionDotNet.Server.Models.Databases
 {
@@ -14,6 +15,7 @@ namespace FaceRecognitionDotNet.Server.Models.Databases
         /// <summary>
         /// A Id of this registered person.
         /// </summary>
+        [Key]
         public Guid Id
         {
             get;
@@ -21,9 +23,20 @@ namespace FaceRecognitionDotNet.Server.Models.Databases
         }
 
         /// <summary>
-        /// A name of this registered person.
+        /// A first name of this registered person.
         /// </summary>
-        public string Name
+        [Required]
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A last name of this registered person.
+        /// </summary>
+        [Required]
+        public string LastName
         {
             get;
             set;
@@ -32,7 +45,18 @@ namespace FaceRecognitionDotNet.Server.Models.Databases
         /// <summary>
         /// A create datetime of this registered person data.
         /// </summary>
-        public string CreatedDateTime
+        [Required]
+        public DateTime CreatedDateTime
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A person photo data.
+        /// </summary>
+        [Required]
+        public byte[] Photo
         {
             get;
             set;

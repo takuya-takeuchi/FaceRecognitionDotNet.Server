@@ -50,7 +50,7 @@ namespace FaceRecognitionDotNet.Server
 
             ConfigureApplicationServices(services);
 
-            services.AddDbContext<LocalDbContext>(options =>
+            services.AddDbContext<PostgreSqlDbContext>(options =>
                 options.UseNpgsql(this.Configuration.GetConnectionString("PostgreSQLConnection")));
         }
 
@@ -83,6 +83,7 @@ namespace FaceRecognitionDotNet.Server
         {
             services.AddTransient<IFaceDetectionService, FaceDetectionService>();
             services.AddTransient<IFaceEncodingService, FaceEncodingService>();
+            services.AddTransient<IFaceRegistrationService, FaceRegistrationService>();
         }
 
         #endregion
