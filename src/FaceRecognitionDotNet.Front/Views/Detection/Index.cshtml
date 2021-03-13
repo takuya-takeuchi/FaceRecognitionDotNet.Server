@@ -9,11 +9,13 @@
 
 <p>Upload image file to detect face</p>
 
-@*<style type="text/css">
-        canvas {
-            border: solid 3px #000;
-        }
-    </style>
+<style type="text/css">
+    canvas {
+        border: solid 3px #000;
+    }
+</style>
+
+@*
 
     <canvas id="SrcCanvas"
             style="height:90%;width:100%;"></canvas>
@@ -46,7 +48,13 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="@image.Data" width="250px" height="200px" alt="Alternate Text" />
+                        <canvas id="SrcCanvas"
+                                style="height:90%;width:100%;"></canvas>
+
+                        <script src="~/js/canvas.js"></script>
+                        <script type="text/javascript">
+                            canvas_init('@Html.Raw(@image.Data)');
+                        </script>
                     </td>
                 </tr>
             }
