@@ -29,24 +29,22 @@
 <form method="post" enctype="multipart/form-data" asp-controller="Registration" asp-action="Submit">
     <p>Upload person data and image file to register</p>
 
-    <div asp-validation-summary="ModelOnly" class="text-danger"/>
+    <div asp-validation-summary="ModelOnly" class="text-danger" />
     <div class="form-group">
-        <label asp-for="FirstName"></label>
-        <input class="form-control" asp-for="FirstName"/>
+        <label asp-for="FirstName" class="control-label"></label>
+        <input class="form-control" asp-for="FirstName" />
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="LastName"></label>
-        <input class="form-control" asp-for="LastName"/>
+        <label asp-for="LastName" class="control-label"></label>
+        <input class="form-control" asp-for="LastName" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <p>Image file that contains one person face</p>
-        
-        <label asp-for="Photo"></label>
+        <label asp-for="Photo" class="control-label"></label>
         <div class="custom-file">
-            <input asp-for="Photo" type="file" name="files" class="custom-file-input" id="inputFile">
+            <input asp-for="Photo" class="custom-file-input" id="inputFile">
             <label class="custom-file-label" for="inputFile">Choose file</label>
         </div>
 
@@ -54,56 +52,56 @@
             bsCustomFileInput.init();
         </script>
 
-        <span asp-validation-for="Photo" class="text-danger"></span> 
+        <span asp-validation-for="Photo" class="text-danger"></span>
     </div>
 
     <input type="submit" class="btn btn-primary" value="Upload" style="float: right" />
 </form>
 
 @*@if (@Model?.Image != null)
-{
-    var image = @Model.Image;
-    var detectAreas = @Model.DetectAreas;
-
-    if (!string.IsNullOrEmpty(@image.Data))
     {
-        var areas = @Html.Raw(Json.Serialize(detectAreas));
-        
-        <p>@image.Name (@image.Width x @image.Height)</p>
+        var image = @Model.Image;
+        var detectAreas = @Model.DetectAreas;
 
-        <div class="detect-flex-container">
-            <div class="detect-flex-left">
-                <canvas id="SrcCanvas"
-                        style="height: 100%; width: 100%;">
-                </canvas>
+        if (!string.IsNullOrEmpty(@image.Data))
+        {
+            var areas = @Html.Raw(Json.Serialize(detectAreas));
 
-                <script type="text/javascript">
-                draw_detect_result('@Html.Raw(@image.Data)', @areas);
-                </script>
-            </div>
-            <div class="detect-flex-right">
-                <table class="table">
-                    <tr>
-                        <th>Left</th>
-                        <th>Top</th>
-                        <th>Right</th>
-                        <th>Bottom</th>
-                    </tr>
-                    @foreach (var area in detectAreas)
-                    {
-                        var left = area.X;
-                        var top = area.Y;
-                        var right = area.X + area.Width;
-                        var bottom = area.Y + area.Height;
+            <p>@image.Name (@image.Width x @image.Height)</p>
+
+            <div class="detect-flex-container">
+                <div class="detect-flex-left">
+                    <canvas id="SrcCanvas"
+                            style="height: 100%; width: 100%;">
+                    </canvas>
+
+                    <script type="text/javascript">
+                    draw_detect_result('@Html.Raw(@image.Data)', @areas);
+                    </script>
+                </div>
+                <div class="detect-flex-right">
+                    <table class="table">
                         <tr>
-                            <td>@left</td>
-                            <td>@top</td>
-                            <td>@right</td>
-                            <td>@bottom</td>
+                            <th>Left</th>
+                            <th>Top</th>
+                            <th>Right</th>
+                            <th>Bottom</th>
                         </tr>
-                    }
-                </table>
+                        @foreach (var area in detectAreas)
+                        {
+                            var left = area.X;
+                            var top = area.Y;
+                            var right = area.X + area.Width;
+                            var bottom = area.Y + area.Height;
+                            <tr>
+                                <td>@left</td>
+                                <td>@top</td>
+                                <td>@right</td>
+                                <td>@bottom</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
             </div>
-        </div>
-    }
-}*@
+        }
+    }*@
