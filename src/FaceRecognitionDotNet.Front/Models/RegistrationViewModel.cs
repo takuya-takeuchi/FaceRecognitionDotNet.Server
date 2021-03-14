@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Http;
 
 namespace FaceRecognitionDotNet.Front.Models
@@ -8,6 +10,12 @@ namespace FaceRecognitionDotNet.Front.Models
     {
 
         #region Properties
+        
+        public Guid Id
+        {
+            get;
+            set;
+        }
 
         [Required(ErrorMessage = "Please enter first name")]
         [Display(Name = "First Name")]

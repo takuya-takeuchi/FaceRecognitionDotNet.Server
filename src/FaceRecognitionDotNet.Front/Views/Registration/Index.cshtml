@@ -7,7 +7,6 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<script src="~/js/canvas.js"></script>
 <script src="/lib/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 
 <style type="text/css">
@@ -57,51 +56,3 @@
 
     <input type="submit" class="btn btn-primary" value="Upload" style="float: right" />
 </form>
-
-@*@if (@Model?.Image != null)
-    {
-        var image = @Model.Image;
-        var detectAreas = @Model.DetectAreas;
-
-        if (!string.IsNullOrEmpty(@image.Data))
-        {
-            var areas = @Html.Raw(Json.Serialize(detectAreas));
-
-            <p>@image.Name (@image.Width x @image.Height)</p>
-
-            <div class="detect-flex-container">
-                <div class="detect-flex-left">
-                    <canvas id="SrcCanvas"
-                            style="height: 100%; width: 100%;">
-                    </canvas>
-
-                    <script type="text/javascript">
-                    draw_detect_result('@Html.Raw(@image.Data)', @areas);
-                    </script>
-                </div>
-                <div class="detect-flex-right">
-                    <table class="table">
-                        <tr>
-                            <th>Left</th>
-                            <th>Top</th>
-                            <th>Right</th>
-                            <th>Bottom</th>
-                        </tr>
-                        @foreach (var area in detectAreas)
-                        {
-                            var left = area.X;
-                            var top = area.Y;
-                            var right = area.X + area.Width;
-                            var bottom = area.Y + area.Height;
-                            <tr>
-                                <td>@left</td>
-                                <td>@top</td>
-                                <td>@right</td>
-                                <td>@bottom</td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </div>
-        }
-    }*@

@@ -1,0 +1,60 @@
+﻿
+@model FaceRecognitionDotNet.Front.Models.ListViewModel;
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<style type="text/css">
+    .list-result {
+        margin: 90px 0 0 0;
+    }
+</style>
+
+<p>Retrieve registered person data</p>
+
+<form method="post" asp-controller="List" asp-action="GetAll">
+    <input type="submit" class="btn btn-primary" value="Get" style="float: right" />
+</form>
+
+<form id="remove" method="post"
+      asp-controller="List"
+      asp-action="Remove"></form>
+
+@if (@Model?.Persons != null)
+{
+    <div class="list-result">
+        <table class="table">
+            <tr>
+                <th>Photo</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Registered DateTime</th>
+                <th>Maintenance</th>
+            </tr>
+            @foreach (var person in @Model.Persons)
+            {
+                <tr>
+                    <td><img src="@person.Photo.Data" height="200" /></td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>@person.CreatedDateTime</td>
+                    <td>
+                        <span class="table-remove">
+                            <button
+                                type="submit"
+                                name="id"
+                                value="@person.Id"
+                                form="remove"
+                                class="btn btn-danger btn-rounded btn-sm my-0">
+                                Delete
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}

@@ -4,10 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using FaceRecognitionDotNet.Front.Helpers;
 using FaceRecognitionDotNet.Front.Models;
 using FaceRecognitionDotNet.Front.Services.Interfaces;
 
@@ -53,7 +53,7 @@ namespace FaceRecognitionDotNet.Front.Controllers
             await formFile.OpenReadStream().CopyToAsync(ms);
 
             using var bitmap = Image.FromStream(ms);
-            var data = ViewImage(ms.ToArray());
+            var data = ImageHelper.ConvertToBase64(ms.ToArray());
             var width = bitmap.Width;
             var height = bitmap.Height;
 
@@ -68,17 +68,6 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
             return this.View(nameof(this.Index), model);
         }
-
-        #region Helpers
-
-        [NonAction]
-        private static string ViewImage(byte[] arrayImage)
-        {
-            var base64String = Convert.ToBase64String(arrayImage, 0, arrayImage.Length);
-            return $"data:image/png;base64,{base64String}";
-        }
-
-        #endregion
 
         #endregion
 

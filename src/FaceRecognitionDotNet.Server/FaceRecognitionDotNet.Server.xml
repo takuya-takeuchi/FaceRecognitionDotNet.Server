@@ -50,9 +50,19 @@
             <param name="faceRegistrationService">The service provide face detect functions.</param>
             <param name="logger">The logger.</param>
         </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.GetAll">
+            <summary>
+            Get all registered person data.
+            </summary>
+        </member>
         <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.Register(FaceRecognitionDotNet.Server.Models.Registration)">
             <summary>
             Register person data.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.Remove(System.Guid)">
+            <summary>
+            Remove person data.
             </summary>
         </member>
         <member name="P:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.IsDisposed">
@@ -125,6 +135,11 @@
         <member name="T:FaceRecognitionDotNet.Server.Models.Demographics">
             <summary>
             Represents a demographics data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.Id">
+            <summary>
+            The id.
             </summary>
         </member>
         <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.FirstName">

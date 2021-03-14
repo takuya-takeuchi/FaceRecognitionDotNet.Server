@@ -11,6 +11,7 @@ using FaceRecognitionDotNet.Client.Api;
 using FaceRecognitionDotNet.Client.Model;
 using FaceRecognitionDotNet.Front.Models;
 using FaceRecognitionDotNet.Front.Services.Interfaces;
+
 using Image = System.Drawing.Image;
 
 namespace FaceRecognitionDotNet.Front.Services
@@ -35,6 +36,18 @@ namespace FaceRecognitionDotNet.Front.Services
         #endregion
 
         #region IFaceDetectionService Members
+
+        public async Task<IEnumerable<Registration>> GetAll()
+        {
+            var faceRegistrationApi = new FaceRegistrationApi(this._EndPointUrl);
+            var registrationResult = await faceRegistrationApi.FaceRegistrationGetAllGetWithHttpInfoAsync();
+            if (registrationResult.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return null;
+            }
+
+            return registrationResult.Data;
+        }
 
         public async Task<string> Register(RegistrationViewModel registrationViewModel, byte[] image)
         {
@@ -71,7 +84,7 @@ namespace FaceRecognitionDotNet.Front.Services
                 var height = area.Right - area.Left;
                 using var cropped = new Bitmap(width, height, PixelFormat.Format24bppRgb);
                 using var g = Graphics.FromImage(cropped);
-                g.DrawImage(bitmap, new Rectangle(x, y, width, height), new Rectangle(0, 0, width, height), GraphicsUnit.Pixel);
+                g.DrawImage(bitmap, new Rectangle(0, 0, width, height), new Rectangle(x, y, width, height), GraphicsUnit.Pixel);
 
                 await using var croppedMemoryStream = new MemoryStream();
                 cropped.Save(croppedMemoryStream, ImageFormat.Png);
@@ -81,10 +94,11 @@ namespace FaceRecognitionDotNet.Front.Services
                 {
                     return "Failed to invoke service";
                 }
-                
+
                 var registration = new Registration
                 (
-                    new Demographics(registrationViewModel.FirstName,
+                    new Demographics(registrationViewModel.Id,
+                                     registrationViewModel.FirstName,
                                      registrationViewModel.LastName,
                                      DateTime.UtcNow),
                     new Encoding(encodingResult.Data.Data),
@@ -103,6 +117,26 @@ namespace FaceRecognitionDotNet.Front.Services
             }
 
             return null;
+        }
+
+        public async Task Remove(Guid id)
+        {
+            var faceRegistrationApi = new FaceRegistrationApi(this._EndPointUrl);
+
+            try
+            {
+                var detectResult = await faceRegistrationApi.FaceRegistrationRemovePostWithHttpInfoAsync(id);
+                if (detectResult.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return;
         }
 
         #endregion

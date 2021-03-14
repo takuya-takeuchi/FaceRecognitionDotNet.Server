@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -44,13 +45,33 @@ namespace FaceRecognitionDotNet.Server.Controllers
         #region Methods
 
         /// <summary>
+        /// Get all registered person data.
+        /// </summary>
+        [Route("GetAll")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<List<Registration>> GetAll()
+        {
+            try
+            {
+                var results = this._FaceRegistrationService.GetAll().Result;
+                return Ok(new List<Registration>(results));
+            }
+            catch (Exception e)
+            {
+                this._Logger.LogError($"[{nameof(this.Register)}] {e.Message}");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
         /// Register person data.
         /// </summary>
         [Route("Register")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult Register([FromBody] Registration registration)
         {
@@ -61,6 +82,27 @@ namespace FaceRecognitionDotNet.Server.Controllers
             catch (Exception e)
             {
                 this._Logger.LogError($"[{nameof(this.Register)}] {e.Message}");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        [Route("Remove")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult Remove(Guid id)
+        {
+            try
+            {
+                return Ok(this._FaceRegistrationService.Remove(id));
+            }
+            catch (Exception e)
+            {
+                this._Logger.LogError($"[{nameof(this.Remove)}] {e.Message}");
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }

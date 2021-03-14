@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore.Storage;
@@ -31,6 +33,55 @@ namespace FaceRecognitionDotNet.Server.Services
 
         #region IFaceRegistrationService Members
 
+        public Task<IEnumerable<Registration>> GetAll()
+        {
+            var results = new List<Registration>();
+
+            try
+            {
+                var context = this._DatabaseContext;
+
+                var registeredPersons = context.RegisteredPersons.ToArray();
+                var featureDatum = context.FeatureDatum.ToArray();
+
+                foreach (var registeredPerson in registeredPersons.ToArray())
+                {
+                    var person = new Registration()
+                    {
+                        Demographics = new Demographics
+                        {
+                            Id = registeredPerson.Id,
+                            FirstName = registeredPerson.FirstName,
+                            LastName = registeredPerson.LastName,
+                            CreatedDateTime = registeredPerson.CreatedDateTime
+                        },
+                        Photo = new Models.Image
+                        {
+                            Data = registeredPerson.Photo
+                        }
+                    };
+
+                    var feature = featureDatum.FirstOrDefault(data => data.RegisteredPersonId == registeredPerson.Id);
+
+                    var encoding = new double[feature.Encoding.Length / sizeof(double)];
+                    Buffer.BlockCopy(feature.Encoding, 0, encoding, 0, encoding.Length);
+
+                    person.Encoding = new Encoding
+                    {
+                        Data = encoding
+                    };
+
+                    results.Add(person);
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle failure
+            }
+
+            return Task.FromResult((IEnumerable<Registration>)results);
+        }
+
         public Task Register(Registration registration)
         {
             IDbContextTransaction transaction = null;
@@ -58,6 +109,43 @@ namespace FaceRecognitionDotNet.Server.Services
                     RegisteredPersonId = id,
                     Encoding = encoding
                 });
+
+                context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle failure
+            }
+            finally
+            {
+                transaction?.Dispose();
+            }
+
+            return Task.CompletedTask;
+        }
+        
+        public Task Remove(Guid id)
+        {
+            IDbContextTransaction transaction = null;
+
+            try
+            {
+                var context = this._DatabaseContext;
+                transaction = context.Database.BeginTransaction();
+
+                var person = context.RegisteredPersons.FirstOrDefault(person => person.Id == id);
+                if (person == null)
+                    return Task.CompletedTask;
+                
+                context.RegisteredPersons.Remove(person);
+
+                var feature = context.FeatureDatum.FirstOrDefault(data => data.RegisteredPersonId == person.Id);
+                if (feature == null)
+                    return Task.CompletedTask;
+
+                context.FeatureDatum.Remove(feature);
 
                 context.SaveChanges();
 
