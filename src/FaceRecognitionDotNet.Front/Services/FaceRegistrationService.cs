@@ -94,10 +94,11 @@ namespace FaceRecognitionDotNet.Front.Services
                 {
                     return "Failed to invoke service";
                 }
-                
+
                 var registration = new Registration
                 (
-                    new Demographics(registrationViewModel.FirstName,
+                    new Demographics(registrationViewModel.Id,
+                                     registrationViewModel.FirstName,
                                      registrationViewModel.LastName,
                                      DateTime.UtcNow),
                     new Encoding(encodingResult.Data.Data),
@@ -116,6 +117,26 @@ namespace FaceRecognitionDotNet.Front.Services
             }
 
             return null;
+        }
+
+        public async Task Remove(Guid id)
+        {
+            var faceRegistrationApi = new FaceRegistrationApi(this._EndPointUrl);
+
+            try
+            {
+                var detectResult = await faceRegistrationApi.FaceRegistrationRemovePostWithHttpInfoAsync(id);
+                if (detectResult.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return;
         }
 
         #endregion

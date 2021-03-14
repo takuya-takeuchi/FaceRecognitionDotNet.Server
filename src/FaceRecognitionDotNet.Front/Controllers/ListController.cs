@@ -54,6 +54,7 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
                 persons.Add(new PersonViewModel
                 {
+                    Id = result.Demographics.Id,
                     FirstName = result.Demographics.FirstName,
                     LastName = result.Demographics.LastName,
                     Photo = new ImageViewModel("", photo, 0, 0),
@@ -64,9 +65,38 @@ namespace FaceRecognitionDotNet.Front.Controllers
             return this.View(nameof(this.Index), new ListViewModel{ Persons = persons});
         }
 
-    #region Helpers
+        [HttpPost]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            await this._FaceRegistrationService.Remove(id);
 
-    [NonAction]
+            var results = await this._FaceRegistrationService.GetAll();
+
+            var persons = new List<PersonViewModel>();
+
+            foreach (var result in results)
+            {
+                await using var ms = new MemoryStream(result.Photo.Data);
+                using var bitmap = Image.FromStream(ms);
+
+                var photo = ImageHelper.ConvertToBase64(result.Photo.Data);
+
+                persons.Add(new PersonViewModel
+                {
+                    Id = result.Demographics.Id,
+                    FirstName = result.Demographics.FirstName,
+                    LastName = result.Demographics.LastName,
+                    Photo = new ImageViewModel("", photo, 0, 0),
+                    CreatedDateTime = result.Demographics.CreatedDateTime
+                });
+            }
+
+            return this.View(nameof(this.Index), new ListViewModel { Persons = persons });
+        }
+
+        #region Helpers
+
+        [NonAction]
     private static string ViewImage(byte[] arrayImage)
     {
         var base64String = Convert.ToBase64String(arrayImage, 0, arrayImage.Length);

@@ -50,6 +50,7 @@ namespace FaceRecognitionDotNet.Server.Services
                     {
                         Demographics = new Demographics
                         {
+                            Id = registeredPerson.Id,
                             FirstName = registeredPerson.FirstName,
                             LastName = registeredPerson.LastName,
                             CreatedDateTime = registeredPerson.CreatedDateTime
@@ -108,6 +109,43 @@ namespace FaceRecognitionDotNet.Server.Services
                     RegisteredPersonId = id,
                     Encoding = encoding
                 });
+
+                context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle failure
+            }
+            finally
+            {
+                transaction?.Dispose();
+            }
+
+            return Task.CompletedTask;
+        }
+        
+        public Task Remove(Guid id)
+        {
+            IDbContextTransaction transaction = null;
+
+            try
+            {
+                var context = this._DatabaseContext;
+                transaction = context.Database.BeginTransaction();
+
+                var person = context.RegisteredPersons.FirstOrDefault(person => person.Id == id);
+                if (person == null)
+                    return Task.CompletedTask;
+                
+                context.RegisteredPersons.Remove(person);
+
+                var feature = context.FeatureDatum.FirstOrDefault(data => data.RegisteredPersonId == person.Id);
+                if (feature == null)
+                    return Task.CompletedTask;
+
+                context.FeatureDatum.Remove(feature);
 
                 context.SaveChanges();
 

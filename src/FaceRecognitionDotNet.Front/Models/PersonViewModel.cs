@@ -8,6 +8,12 @@ namespace FaceRecognitionDotNet.Front.Models
 
         #region Properties
 
+        public Guid Id
+        {
+            get;
+            set;
+        }
+
         public string FirstName
         {
             get;

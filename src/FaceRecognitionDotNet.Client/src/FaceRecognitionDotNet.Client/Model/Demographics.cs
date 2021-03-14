@@ -39,17 +39,26 @@ namespace FaceRecognitionDotNet.Client.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Demographics" /> class.
         /// </summary>
+        /// <param name="id">The id. (required).</param>
         /// <param name="firstName">The first name. (required).</param>
         /// <param name="lastName">The last name. (required).</param>
         /// <param name="createdDateTime">The create datetime. (required).</param>
-        public Demographics(string firstName = default(string), string lastName = default(string), DateTime createdDateTime = default(DateTime))
+        public Demographics(Guid id = default(Guid), string firstName = default(string), string lastName = default(string), DateTime createdDateTime = default(DateTime))
         {
+            this.Id = id;
             // to ensure "firstName" is required (not null)
             this.FirstName = firstName ?? throw new ArgumentNullException("firstName is a required property for Demographics and cannot be null");
             // to ensure "lastName" is required (not null)
             this.LastName = lastName ?? throw new ArgumentNullException("lastName is a required property for Demographics and cannot be null");
             this.CreatedDateTime = createdDateTime;
         }
+
+        /// <summary>
+        /// The id.
+        /// </summary>
+        /// <value>The id.</value>
+        [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = false)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The first name.
@@ -80,6 +89,7 @@ namespace FaceRecognitionDotNet.Client.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Demographics {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  FirstName: ").Append(FirstName).Append("\n");
             sb.Append("  LastName: ").Append(LastName).Append("\n");
             sb.Append("  CreatedDateTime: ").Append(CreatedDateTime).Append("\n");
@@ -118,6 +128,11 @@ namespace FaceRecognitionDotNet.Client.Model
 
             return 
                 (
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
+                ) && 
+                (
                     this.FirstName == input.FirstName ||
                     (this.FirstName != null &&
                     this.FirstName.Equals(input.FirstName))
@@ -143,6 +158,8 @@ namespace FaceRecognitionDotNet.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.FirstName != null)
                     hashCode = hashCode * 59 + this.FirstName.GetHashCode();
                 if (this.LastName != null)

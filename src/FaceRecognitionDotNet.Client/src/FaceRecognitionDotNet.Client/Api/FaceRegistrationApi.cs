@@ -60,6 +60,24 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <param name="registration"> (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> FaceRegistrationRegisterPostWithHttpInfo(Registration registration = default(Registration));
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <returns></returns>
+        void FaceRegistrationRemovePost(Guid? id = default(Guid?));
+
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> FaceRegistrationRemovePostWithHttpInfo(Guid? id = default(Guid?));
         #endregion Synchronous Operations
     }
 
@@ -113,6 +131,29 @@ namespace FaceRecognitionDotNet.Client.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> FaceRegistrationRegisterPostWithHttpInfoAsync(Registration registration = default(Registration), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task FaceRegistrationRemovePostAsync(Guid? id = default(Guid?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> FaceRegistrationRemovePostWithHttpInfoAsync(Guid? id = default(Guid?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -447,6 +488,121 @@ namespace FaceRecognitionDotNet.Client.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FaceRegistrationRegisterPost", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Remove person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <returns></returns>
+        public void FaceRegistrationRemovePost(Guid? id = default(Guid?))
+        {
+            FaceRegistrationRemovePostWithHttpInfo(id);
+        }
+
+        /// <summary>
+        /// Remove person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public FaceRecognitionDotNet.Client.Client.ApiResponse<Object> FaceRegistrationRemovePostWithHttpInfo(Guid? id = default(Guid?))
+        {
+            FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+            var localVarContentType = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(FaceRecognitionDotNet.Client.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/FaceRegistration/Remove", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FaceRegistrationRemovePost", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Remove person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task FaceRegistrationRemovePostAsync(Guid? id = default(Guid?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            await FaceRegistrationRemovePostWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove person data. 
+        /// </summary>
+        /// <exception cref="FaceRecognitionDotNet.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<FaceRecognitionDotNet.Client.Client.ApiResponse<Object>> FaceRegistrationRemovePostWithHttpInfoAsync(Guid? id = default(Guid?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            FaceRecognitionDotNet.Client.Client.RequestOptions localVarRequestOptions = new FaceRecognitionDotNet.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+
+            var localVarContentType = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = FaceRecognitionDotNet.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            if (id != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(FaceRecognitionDotNet.Client.Client.ClientUtils.ParameterToMultiMap("", "id", id));
+            }
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/FaceRegistration/Remove", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FaceRegistrationRemovePost", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

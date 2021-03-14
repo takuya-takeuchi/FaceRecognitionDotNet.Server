@@ -86,6 +86,27 @@ namespace FaceRecognitionDotNet.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove person data.
+        /// </summary>
+        [Route("Remove")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult Remove(Guid id)
+        {
+            try
+            {
+                return Ok(this._FaceRegistrationService.Remove(id));
+            }
+            catch (Exception e)
+            {
+                this._Logger.LogError($"[{nameof(this.Remove)}] {e.Message}");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         #endregion
 
     }

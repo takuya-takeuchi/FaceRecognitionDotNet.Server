@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
 *FaceEncodingApi* | [**FaceEncodingEncodingPost**](docs/FaceEncodingApi.md#faceencodingencodingpost) | **POST** /FaceEncoding/Encoding | Returns an face feature data from image contains a human face.
 *FaceRegistrationApi* | [**FaceRegistrationGetAllGet**](docs/FaceRegistrationApi.md#faceregistrationgetallget) | **GET** /FaceRegistration/GetAll | Get all registered person data.
 *FaceRegistrationApi* | [**FaceRegistrationRegisterPost**](docs/FaceRegistrationApi.md#faceregistrationregisterpost) | **POST** /FaceRegistration/Register | Register person data.
+*FaceRegistrationApi* | [**FaceRegistrationRemovePost**](docs/FaceRegistrationApi.md#faceregistrationremovepost) | **POST** /FaceRegistration/Remove | Remove person data.
 
 
 <a name="documentation-for-models"></a>

@@ -13,6 +13,16 @@ namespace FaceRecognitionDotNet.Server.Models
         #region Properties
 
         /// <summary>
+        /// The id.
+        /// </summary>
+        [Required]
+        public Guid Id
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The first name.
         /// </summary>
         [Required]
