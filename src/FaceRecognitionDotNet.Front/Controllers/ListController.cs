@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +47,9 @@ namespace FaceRecognitionDotNet.Front.Controllers
 
             foreach (var result in results)
             {
+                await using var ms = new MemoryStream(result.Photo.Data);
+                using var bitmap = Image.FromStream(ms);
+
                 var photo = ImageHelper.ConvertToBase64(result.Photo.Data);
 
                 persons.Add(new PersonViewModel

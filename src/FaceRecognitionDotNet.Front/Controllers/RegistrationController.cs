@@ -51,11 +51,6 @@ namespace FaceRecognitionDotNet.Front.Controllers
             await using var ms = new MemoryStream();
             await model.Photo.OpenReadStream().CopyToAsync(ms);
 
-            using var bitmap = Image.FromStream(ms);
-            var data = ViewImage(ms.ToArray());
-            var width = bitmap.Width;
-            var height = bitmap.Height;
-
             var result = this._FaceRegistrationService.Register(model, ms.ToArray());
 
             return this.View(nameof(this.Index), model);

@@ -84,7 +84,7 @@ namespace FaceRecognitionDotNet.Front.Services
                 var height = area.Right - area.Left;
                 using var cropped = new Bitmap(width, height, PixelFormat.Format24bppRgb);
                 using var g = Graphics.FromImage(cropped);
-                g.DrawImage(bitmap, new Rectangle(x, y, width, height), new Rectangle(0, 0, width, height), GraphicsUnit.Pixel);
+                g.DrawImage(bitmap, new Rectangle(0, 0, width, height), new Rectangle(x, y, width, height), GraphicsUnit.Pixel);
 
                 await using var croppedMemoryStream = new MemoryStream();
                 cropped.Save(croppedMemoryStream, ImageFormat.Png);
