@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:13
+    container_name: "facerecognition-server-db"
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 55432:5432
+    volumes:
+      - ./database:/var/lib/postgresql/data
+      - ./logs:/var/log
+
+  database-gui:
+    image: dpage/pgadmin4:5
+    container_name: "facerecognition-server-db-gui"
+    ports:
+      - 58000:80
+    volumes:
+      - ./database-gui:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
+    depends_on:
+      - database

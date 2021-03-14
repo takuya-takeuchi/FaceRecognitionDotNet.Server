@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FaceRecognitionDotNet.Server</name>
+    </assembly>
+    <members>
+        <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController">
+            <summary>
+            Get rectangles of face area from specified image.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController.#ctor(FaceRecognitionDotNet.Server.Services.Interfaces.IFaceDetectionService,Microsoft.Extensions.Logging.ILogger{FaceRecognitionDotNet.Server.Controllers.FaceDetectionController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController"/> class with <see cref="T:FaceRecognitionDotNet.Server.Services.Interfaces.IFaceDetectionService"/> and logger.
+            </summary>
+            <param name="faceDetectionService">The service provide face detect functions.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceDetectionController.Locations(FaceRecognitionDotNet.Server.Models.Image)">
+            <summary>
+            Returns an enumerable collection of face location correspond to all faces in specified image.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController">
+            <summary>
+            Get feature data of face.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController.#ctor(FaceRecognitionDotNet.Server.Services.Interfaces.IFaceEncodingService,Microsoft.Extensions.Logging.ILogger{FaceRecognitionDotNet.Server.Controllers.FaceEncodingController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController"/> class with <see cref="T:FaceRecognitionDotNet.Server.Services.Interfaces.IFaceEncodingService"/> and logger.
+            </summary>
+            <param name="faceEncodingService">The service provide face detect functions.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceEncodingController.Encoding(FaceRecognitionDotNet.Server.Models.Image)">
+            <summary>
+            Returns an face feature data from image contains a human face.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController">
+            <summary>
+            Post person data.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.#ctor(FaceRecognitionDotNet.Server.Services.Interfaces.IFaceRegistrationService,Microsoft.Extensions.Logging.ILogger{FaceRecognitionDotNet.Server.Controllers.FaceEncodingController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController"/> class with <see cref="T:FaceRecognitionDotNet.Server.Services.Interfaces.IFaceRegistrationService"/> and logger.
+            </summary>
+            <param name="faceRegistrationService">The service provide face detect functions.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.GetAll">
+            <summary>
+            Get all registered person data.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.Register(FaceRecognitionDotNet.Server.Models.Registration)">
+            <summary>
+            Register person data.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Controllers.FaceRegistrationController.Remove(System.Guid)">
+            <summary>
+            Remove person data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance has been disposed.
+            </summary>
+            <returns>true if this instance has been disposed; otherwise, false.</returns>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.Dispose">
+            <summary>
+            Releases all resources used by this <see cref="T:FaceRecognitionDotNet.DisposableObject"/>.
+            </summary>
+        </member>
+        <member name="M:FaceRecognitionDotNet.Server.Helpers.Cache.Resource.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by this <see cref="T:FaceRecognitionDotNet.DisposableObject"/>.
+            </summary>
+            <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Databases.FeatureData">
+            <summary>
+            Represents a feature data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.Id">
+            <summary>
+            A Id of this feature data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.RegisteredPersonId">
+            <summary>
+            A Id that links to registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.FeatureData.Encoding">
+            <summary>
+            A face encoding data.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson">
+            <summary>
+            Represents a person who be registered to database.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.Id">
+            <summary>
+            A Id of this registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.FirstName">
+            <summary>
+            A first name of this registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.LastName">
+            <summary>
+            A last name of this registered person.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.CreatedDateTime">
+            <summary>
+            A create datetime of this registered person data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Databases.RegisteredPerson.Photo">
+            <summary>
+            A person photo data.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Demographics">
+            <summary>
+            Represents a demographics data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.Id">
+            <summary>
+            The id.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.FirstName">
+            <summary>
+            The first name.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.LastName">
+            <summary>
+            The last name.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Demographics.CreatedDateTime">
+            <summary>
+            The create datetime.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Encoding">
+            <summary>
+            Represents a feature data of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Encoding.Data">
+            <summary>
+            A feature data of face as raw format.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.FaceArea">
+            <summary>
+            Describes the left, top, right and bottom location of a face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Bottom">
+            <summary>
+            The y-axis value of the bottom of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Left">
+            <summary>
+            The x-axis value of the left side of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Right">
+            <summary>
+            The x-axis value of the right side of the rectangle of face.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.FaceArea.Top">
+            <summary>
+            The y-axis value of the top of the rectangle of face.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Image">
+            <summary>
+            Represents a image data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Image.Data">
+            <summary>
+            The image data.
+            </summary>
+        </member>
+        <member name="T:FaceRecognitionDotNet.Server.Models.Registration">
+            <summary>
+            Represents a registration data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Registration.Demographics">
+            <summary>
+            The person demographics data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Registration.Encoding">
+            <summary>
+            The face encoding data.
+            </summary>
+        </member>
+        <member name="P:FaceRecognitionDotNet.Server.Models.Registration.Photo">
+            <summary>
+            The photo data.
+            </summary>
+        </member>
+    </members>
+</doc>
